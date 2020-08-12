@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="zexuano.github.io/favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/zexuano.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="zexuano.github.iodarkgist.css" />    
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="zexuano.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post  no-image ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">Zipf&#39;s Law Distribution of Skills Listed in Job Postings</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Look at this distribution of text, it looks suspiciously like Zipf&rsquo;s law! I&rsquo;m going to take that out of context and opine that it applies to this text too.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2019-127-07">1 July 2019</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 5 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>In trying to understand the distribution of skills on a particular job portal, I&rsquo;ve observed that the set of possible skills on the portal follows a Zipf&rsquo;s law-like distribution, that&rsquo;s cool!</p>
+<h3 id="background">Background</h3>
+<p>I find myself still looking at job descriptions from Jobsbank, and this time I&rsquo;m looking at the skills associated with each job description. I&rsquo;ve noticed that each job description comes with a list of listed skills as well as a confidence score (of how relevant this skill is to this job). It would be interesting to see the distribution of skills across all job postings, specific industry sectors, and specific job titles.</p>
+<p>Intuitively, one would expect there to be significant variance in the signal-to-noise ratio of these listed skills. For instance, almost everyone is expected to know how to use and navigate a computer nowadays, so knowing &lsquo;Microsoft Office&rsquo; is sort of taken for granted, but is nonetheless listed as a skill. It would be interesting to see if that is indeed reflected in the distribution of skills on the market, and if so, what can be done to improve the signal coming through in this mess.</p>
+<h3 id="counts-and-scores">Counts and Scores</h3>
+<p>The skills for each job posting is generated by JobKred. I am not aware of the means through which these skills are generated, but I would assume that the job description is fed into an engine which then spits out a certain number of skills with associated confidence scores.</p>
+<p>In looking at these skills, I collected two scores. First, there is the raw count - the number of times the skill appeared on a job posting. Second, there is the confidence score - the sum of all the individual confidence scores of all the job postings where the skill appears.</p>
+<p>The total number of possible skills was identified by manually inspecting the API endpoints of the site. This came out to be a rather manageable number of about ten thousand, which happened to be nicely arranged in linearly increasing IDs.</p>
+<p>As for the actual job posting data, we looked at a snapshot of all available job postings on a particular day. This came out to be approximately 25 thousand job postings, which was extracted using Scrapy and other tools.</p>
+<p>The raw skills data and the following charts can be found <a href="https://github.com/ongzexuan/jobsbank-skills">here</a>.</p>
+<h3 id="counts">Counts</h3>
+<p>First I looked at the discrete counts of the skills. The following chart shows the true and predicted counts of the top 250 most frequently occurring skills. The predicted counts were calculated by taking the reciprocal of the rank multiplied by the highest true count value. I decided to cut off the graph at 250 ranks to better accentuate the shape of the curve at smaller rank values, which is really what we&rsquo;re after anyway.</p>
+<figure>
+    <img src="/zipf-law-distribution-skills/zipf_law_count.png"
+         alt="True count of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/> <figcaption>
+            <p>True count of skills and predicted count of skills (based on reciprocal rank) against rank order of skill.</p>
+        </figcaption>
+</figure>
+
+<p>The true count sort of appears to follow a Zipf&rsquo;s law distribution. This is my way of saying look the shape looks kind of like that, which is cool and that&rsquo;s all I really wanted to know, and being not-a-mathematical statistician I am unable to say more than that.</p>
+<p>Here are the top 10 skills as ordered by count:</p>
+<ol>
+<li>Management Accounting</li>
+<li>Leadership Development</li>
+<li>Microsoft Office SharePoint Server</li>
+<li>Customer Service Management</li>
+<li>Marketing Analytics</li>
+<li>Strategic Policy Development</li>
+<li>Sales &amp; Marketing</li>
+<li>Strategy Alignment</li>
+<li>Business Development Consultancy</li>
+<li>Microsoft Exchange</li>
+</ol>
+<h3 id="scores">Scores</h3>
+<p>Next, I looked at the confidence scores of the skills. I did not look too much at the range of the confidence scores, but they appear to be distributed between 0 and 20, with extreme values for low/high confidence options.</p>
+<p>I would expect that the distribution for scores to be closer to that predicted by the Zipf&rsquo;s law distribution. Intuitively, there are only so many relevant skills one can put for a particular job description, which is unlikely to number more than a two digit number. However, most of the job descriptions in this data set contains about 20 listed skills, so there will be a large number of skills listed that have low relevance values, but made it into the top 20 for a job description by virtue of the quota. Hence, the relative weights as indicated by the confidence scores should compensate for this effect.</p>
+<figure>
+    <img src="/zipf-law-distribution-skills/zipf_law_score.png"
+         alt="True score of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/> <figcaption>
+            <p>True score of skills and predicted count of skills (based on reciprocal rank) against rank order of skill.</p>
+        </figcaption>
+</figure>
+
+<p>This distribution appears to be much closer to the predicted distribution than that observed in the previous chart.</p>
+<p>Here are the top 10 skills as ordered by the sum of the confidence scores:</p>
+<ol>
+<li>Management Accounting</li>
+<li>Microsoft Office SharePoint Server</li>
+<li>Customer Service Management</li>
+<li>Sales &amp; Marketing</li>
+<li>Leadership Development</li>
+<li>Engineering Design</li>
+<li>Marketing Analytics</li>
+<li>Java Application Development</li>
+<li>Microsoft Exchange</li>
+<li>Research &amp; Development</li>
+</ol>
+<p>There is significant overlap between this list and the previous list which was sorted by count. I&rsquo;m of the opinion that many of these skills listed are far too generic to conclude anything significant about the underlying job.</p>
+<h3 id="possible-future-work">Possible Future Work</h3>
+<p>That&rsquo;s all I&rsquo;ve done so far. There are a number of interesting stretch goals that would be quite relevant. Here&rsquo;s some of them that you or me may want to look at in future:</p>
+<ol>
+<li>A pseudo &lsquo;tf-idf&rsquo; scoring mechanism to filter out skills that are too generic to be of real help in understanding a job</li>
+<li>Analyze change in skill demand over time. The proportion scores are already calculated in the excel spreadsheet, we just have to do that over multiple time points</li>
+<li>Remove really irrelevant skills like &lsquo;Maintaining a Positive Attitude&rsquo;. Also, does &lsquo;Mahout&rsquo; refer to an elephant rider or the Apache framework? I&rsquo;m not particularly convinced that the former hires through an online job portal.</li>
+<li>Remove overlapping skills like &lsquo;Engineering&rsquo; and &lsquo;Mechanical Engineering&rsquo;. Again, not convinced that &lsquo;Engineering&rsquo; as a skill tells me any more than having the word &lsquo;engineer&rsquo; in the job title.</li>
+</ol>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="zexuano.github.io/posts/effectively-free-etl-with-lambdas/">
+                <img class="post-card-image"src="/effectively-free-etl-with-lambdas/architecture.png" alt="Effectively Free ETL with Lambdas"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/effectively-free-etl-with-lambdas/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Effectively Free ETL with Lambdas</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Who knew AWS Lambdas had a free tier? Life is great indeed. Here we rejoice over the magnimity of Bezos and talk about how to package our functions into Lambdas.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2019-126-06">17 June 2019</time>
+                            <span class="bull">&bull;</span> 5 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="zexuano.github.io/posts/etl-on-the-cheap-with-aws/">
+                <img class="post-card-image"src="/etl-on-the-cheap-with-aws/feature.png" alt="ETL on the Cheap with AWS"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/etl-on-the-cheap-with-aws/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">Dev</div>
+                    
+
+                    <h2 class="post-card-title">ETL on the Cheap with AWS</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Or how to be a an absolute scrooge using AWS as a student who ran out of GitHub Educate funds. Full of funny practices, such as putting long-lived functions in Lambdas, turning off the production database when not in use, and scheduling ETL on the clock without triggers.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2019-127-07">15 July 2019</time>
+                            <span class="bull">&bull;</span> 13 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="zexuano.github.io">zexuannotes</a> &copy; 2019</section>
+                <nav class="site-footer-nav">
+                    <a href="zexuano.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="zexuano.github.io/favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/zexuano.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="zexuano.github.iodarkgist.css" />    
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="zexuano.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">Piazza Integration for Slack</h1>
+
+                
+                    <p class="post-full-custom-excerpt">The homeworks haven&rsquo;t come in for grading yet. Students complain that we don&rsquo;t respond to Piazza questions quickly enough. I suppose if the questions fly directly into our Slack, that might speed things up a tad. Piazza doesn&rsquo;t officially support an API, so I built around it!</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2019-121-01">16 January 2019</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/unofficial-piazza-integration-slack/feature.png" alt="Piazza Integration for Slack" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>The homeworks are not forthcoming at the moment so I&rsquo;ve taken the night off to write a Piazza Slackbot. You can find it <a href="https://github.com/ongzexuan/piazza_slackbot">here</a>, feel free to fork it for your use.</p>
+<h2 id="motivation">Motivation</h2>
+<p>Our TA team for the Natural Language Processing course has a new brand new Slack channel. It would be great if we could collect all the relevant course information in one place so we wouldn&rsquo;t have to check so many places for notifications. This would include Github commit notifications (for the main course repo) and notifications for new Piazza posts. Ideally, we would also at some point have a monitoring bot for Gradescope and Autolab to provide daily logs of submission numbers, scores and job times, but let&rsquo;s start with the Piazza posts.</p>
+<figure>
+    <img src="/unofficial-piazza-integration-slack/poc.png"
+         alt="Proof of concept!"/> <figcaption>
+            <p>Proof of concept!</p>
+        </figcaption>
+</figure>
+
+<h2 id="building">Building</h2>
+<p>As usual, I hoped that someone would have already done it. There is as of yet an official Piazza integration for Slack, so we&rsquo;d need a custom one. There are a number of scripts floating around on the Internet for a Piazza Slackbot. I decided to adapt mine from <a href="https://github.com/t-davidson/piazza-slackbot">t-davidson&rsquo;s piazza-slackbot</a>.</p>
+<h3 id="connections">Connections</h3>
+<p>There are already established packages for managing the Slack and Piazza connections. In this case we used the unofficial <code>piazza-api</code> and <code>slacker</code>.</p>
+<h3 id="pulling-the-latest-posts">Pulling the latest posts</h3>
+<p>The unofficial api does not provide for a means to pull the latest/new posts. One could in theory get the post count or something, and then pull the entire list of posts from Piazza. This is quite a costly request and Piazza will probably hate me.</p>
+<p>Another method is to keep a record of posts already forwarded to Slack so we don&rsquo;t end up forwarding it again. This could take the form of an environment variable which keeps track of the post id of the last forwarded post. This method however would require conscientious attention in updating the environment variable per deployment.</p>
+<p>Instead, a nice workaround of sorts is to make use of the feed feature, an endpoint which is called when the Piazza page is loaded. The feed provides information to populate the standard Piazza page. Instead of providing the full post information, it instead provides a short snippet of each post.</p>
+<p>The feed is orderd in a priority queue sort of way. Pinned posts are at the top, and then the remaining posts follow a chronological order. It happens that the post numbers increase linearly, so as long as we can get past the pinned posts, the first non-pinned post will be the latest post. We can distinguish a pinned post from a non-pinned post by the presence of the <code>pinned</code> key in the dictionary that represents the post in the feed (Ideally we would use the value but it seems to be designed this way currently). With this, we can write a function that returns us the latest post id.</p>
+<pre><code>def get_max_id(feed):
+    for post in feed:
+        if &quot;pin&quot; not in post:
+            return post[&quot;nr&quot;]
+    return -1
+</code></pre><h3 id="short-logic">Short Logic</h3>
+<p>With this function, the polling logic can then be simply:</p>
+<ol>
+<li>At the start-up of the app, fetch the latest post id. This serves as the &lsquo;last served&rsquo; post.</li>
+<li>Each minute or interval, fetch the new latest post id. If there is a difference between the old and new latest ids, then we know new posts have occurred.</li>
+<li>We can then walk over the ids between the old and new latest and forward their information to Slack. In this case, we did a full fetch of the post information so we can forward more information to Slack instead of just the small snippet.</li>
+</ol>
+<p>At this point, we should also handle the case where there are missing posts. Although Piazza posts ids are created in increments of 1, deletions can sometimes occur (like when an admin deletes a post).</p>
+<h2 id="deployment">Deployment</h2>
+<p>I deployed this bot on a free-tier Heroku instance. Was rather quick and hassle free.</p>
+<p>For Heroku deployment some additional configuration files are needed. Specifcally the Procfile:</p>
+<pre><code>worker: python piazza_bot.py
+</code></pre><p>Indicating the process type as <code>worker</code> instead of the more common <code>web</code> lets Heroku know that this app will not be binding to the HTTP port. This prevents Heroku from terminating the app prematurely.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;m just happy it still runs in the morning. In future I&rsquo;d make it a more full-fledged bot where you can at least poll it for its health too.</p>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+ no-image
+ ">
+
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/design-pattern-facebook-chatbot/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Thoughts on a Design Pattern for Facebook Chatbots</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>A compilation of post-mortem thoughts on building my first Facebook chat bot that is more than just a &lsquo;Hello World&rsquo;, mostly motivated that almost everyone seems to be just building a thing that works without much thought about the context.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2018-127-07">18 July 2018</time>
+                            <span class="bull">&bull;</span> 21 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="zexuano.github.io/posts/five-line-glossing-expex/">
+                <img class="post-card-image"src="/five-line-glossing-expex/feature.png" alt="Latex: Five Line Gloss for Linguistics Typesetting"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/five-line-glossing-expex/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">language</div>
+                    
+
+                    <h2 class="post-card-title">Latex: Five Line Gloss for Linguistics Typesetting</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>I&rsquo;m not great with LaTex, but I need a five-line gloss for the conlang I&rsquo;m building for Minecraft (for a class). Using the <code>expex</code> package, we can bootstrap a five-line gloss from the tools it provides out of the box.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2019-121-01">16 January 2019</time>
+                            <span class="bull">&bull;</span> 2 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="zexuano.github.io">zexuannotes</a> &copy; 2019</section>
+                <nav class="site-footer-nav">
+                    <a href="zexuano.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

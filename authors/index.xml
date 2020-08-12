@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on zexuannotes</title>
+    <link>zexuano.github.io/authors/</link>
+    <description>Recent content in Authors on zexuannotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2018–2020, zexuannotes</copyright>
+    <lastBuildDate>Wed, 17 Jun 2020 00:49:17 -0400</lastBuildDate>
+    
+	<atom:link href="zexuano.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>zexuano.github.io/authors/zexuano/</link>
+      <pubDate>Wed, 17 Jun 2020 00:49:17 -0400</pubDate>
+      
+      <guid>zexuano.github.io/authors/zexuano/</guid>
+      <description>About Me I&amp;rsquo;m interested in the intersection of text and computing. Specifically, there&amp;rsquo;s working with certain domains of text (e.g. k-12 text, patent documents), getting computers to be able to process and understand the text (at the semantic level and higher), and then trying to do it really fast, maybe in parallel (like, preferably in less time than it takes to get a coffee).
+I have a pipe dream that we will at some point, hopefully within my lifetime, be able to build an intelligent thing that will help make K-12 education more personalized and better for all students at a much lower cost.</description>
+    </item>
+    
+  </channel>
+</rss>

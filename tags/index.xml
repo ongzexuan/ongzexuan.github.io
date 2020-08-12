@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on zexuannotes</title>
+    <link>zexuano.github.io/tags/</link>
+    <description>Recent content in Tags on zexuannotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2018–2020, zexuannotes</copyright>
+    <lastBuildDate>Mon, 15 Jul 2019 00:49:17 -0400</lastBuildDate>
+    
+	<atom:link href="zexuano.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dev</title>
+      <link>zexuano.github.io/tags/dev/</link>
+      <pubDate>Mon, 15 Jul 2019 00:49:17 -0400</pubDate>
+      
+      <guid>zexuano.github.io/tags/dev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>language</title>
+      <link>zexuano.github.io/tags/language/</link>
+      <pubDate>Wed, 16 Jan 2019 00:49:17 -0400</pubDate>
+      
+      <guid>zexuano.github.io/tags/language/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

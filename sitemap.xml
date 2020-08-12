@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>zexuano.github.io/</loc>
+    <lastmod>2020-07-14T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/</loc>
+    <lastmod>2020-07-14T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/prometheus-grafana-seai/</loc>
+    <lastmod>2020-07-14T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/authors/zexuano/</loc>
+    <lastmod>2020-06-17T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/authors/</loc>
+    <lastmod>2020-06-17T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/tags/dev/</loc>
+    <lastmod>2019-07-15T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/etl-on-the-cheap-with-aws/</loc>
+    <lastmod>2019-07-15T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/tags/</loc>
+    <lastmod>2019-07-15T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/zipf-law-distribution-skills/</loc>
+    <lastmod>2019-07-01T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/effectively-free-etl-with-lambdas/</loc>
+    <lastmod>2019-06-17T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/tags/language/</loc>
+    <lastmod>2019-01-16T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/five-line-glossing-expex/</loc>
+    <lastmod>2019-01-16T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/unofficial-piazza-integration-slack/</loc>
+    <lastmod>2019-01-16T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/design-pattern-facebook-chatbot/</loc>
+    <lastmod>2018-07-18T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/posts/malmo-maze-solver/</loc>
+    <lastmod>2018-01-04T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>zexuano.github.io/categories/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="zexuano.github.io/favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/zexuano.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="zexuano.github.iodarkgist.css" />    
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="zexuano.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="zexuano.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/zexuano.github.io/tags/language">language</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">Latex: Five Line Gloss for Linguistics Typesetting</h1>
+
+                
+                    <p class="post-full-custom-excerpt">I&rsquo;m not great with LaTex, but I need a five-line gloss for the conlang I&rsquo;m building for Minecraft (for a class). Using the <code>expex</code> package, we can bootstrap a five-line gloss from the tools it provides out of the box.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2019-121-01">16 January 2019</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 2 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/five-line-glossing-expex/feature.png" alt="Latex: Five Line Gloss for Linguistics Typesetting" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>In the midst of building my conlang for a class, I&rsquo;ve ended up with a disparate collection of Word documents for various sections of my language. I figured it&rsquo;d be a good time to compile everything into a nice LaTex document from hereon for future-proofing purposes (and of course, it looks much nicer to read).</p>
+<h2 id="ipa-symbols">IPA Symbols</h2>
+<p>I started off using the TIPA package. It&rsquo;s quite convenient with the reference chart once you get the hang of it. However, it started becoming unwieldly halfway, in particular I found it difficult to get <code>\tipa</code> to work with glossing.</p>
+<p>I have since changed to Unicode on XeLaTex. I think</p>
+<p>If you need more reasons to switch over to the dark side, <a href="https://tex.stackexchange.com/questions/224164/typesetting-phonetic-symbols-unicode-or-tipa">here</a> is a good list of reasons why you should. To quote Jason Zentz, <code>[ˌɛkspləˈneɪʃən]</code> is much more readable (wait for it) than <code>\textipa{[&quot;&quot;Ekspl@&quot;neIS@n]}</code>.</p>
+<h2 id="glossing">Glossing</h2>
+<p>I started with <code>gb4e</code> and <code>cgloss4e</code>. The issue here is that <code>gb4e</code> is limited to only 3 line glosses, including the header, and my class needs a 5 line gloss.
+There did not appear to be a straightforward workaround to the problem.</p>
+<p>Instead I switched to <code>expex</code>. <code>expex</code> provides approximately 3 gloss line classes, but they can be re-used to give more lines if necessary. For instance:</p>
+<pre><code>\ex
+    \begingl
+    \gla dʊro pa jʊma je jʊkmʊha {}//
+    \glb dʊro pa jʊma je jʊk- mʊha//
+    \glb 3\tss{RD}p.male NOM 1\tss{ST}p ACC HUM-HUM see//
+    \glc He {} me {} {} see//
+    \glft `He sees me'//
+    \endgl
+\xe
+</code></pre><p>This gives a rather nice five line gloss:</p>
+<figure>
+    <img src="/five-line-glossing-expex/fiveline.png"
+         alt="A nice five-line gloss! Gosh, why did we need five lines."/> <figcaption>
+            <p>A nice five-line gloss! Gosh, why did we need five lines.</p>
+        </figcaption>
+</figure>
+
+<p>It is also possible to modify the styles of <code>\gla</code>, <code>\glb</code>, and <code>\glc</code> respectively with the <code>expex</code> package. The full documentation can be found <a href="http://mirrors.sorengard.com/ctan/macros/generic/expex/expex-doc.pdf">here</a>.</p>
+<p>Note: <code>\tss{}</code> is a shorthand for <code>\textsuperscript{}</code>. Typing less is always great
+Note2: The <code>\ex</code> environment aligns words vertically using whitespaces. Empty &lsquo;word&rsquo; spaces need to be highlighted using <code>{}</code>, which I guess is reasonable.</p>
+<h2 id="fonts">Fonts</h2>
+<p>I&rsquo;m rendering my work on ShareLatex. To use Unicode symbols, we have to compile using XeLaTex instead of the default LaTex. Then, a Unicode supporting font needs to be used as well. In this case, I&rsquo;m using <a href="https://software.sil.org/charis/">Charis SIL</a>. To get the fonts to work, upload the downloaded fonts to the project directory, and make some adjustments to the settings in the header of the document:</p>
+<pre><code>\usepackage{expex}
+\usepackage{fontspec}
+\setmainfont[
+    BoldFont={CharisSIL-B.ttf},
+    ItalicFont={CharisSIL-I.ttf},
+    BoldItalicFont={CharisSIL-BI.ttf}
+]{CharisSIL-R.ttf}
+</code></pre>
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/zexuano.github.io/tags/language">language</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="zexuano.github.io/posts/unofficial-piazza-integration-slack/">
+                <img class="post-card-image"src="/unofficial-piazza-integration-slack/feature.png" alt="Piazza Integration for Slack"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/unofficial-piazza-integration-slack/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Piazza Integration for Slack</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>The homeworks haven&rsquo;t come in for grading yet. Students complain that we don&rsquo;t respond to Piazza questions quickly enough. I suppose if the questions fly directly into our Slack, that might speed things up a tad. Piazza doesn&rsquo;t officially support an API, so I built around it!</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2019-121-01">16 January 2019</time>
+                            <span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="zexuano.github.io/posts/effectively-free-etl-with-lambdas/">
+                <img class="post-card-image"src="/effectively-free-etl-with-lambdas/architecture.png" alt="Effectively Free ETL with Lambdas"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="zexuano.github.io/posts/effectively-free-etl-with-lambdas/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Effectively Free ETL with Lambdas</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Who knew AWS Lambdas had a free tier? Life is great indeed. Here we rejoice over the magnimity of Bezos and talk about how to package our functions into Lambdas.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2019-126-06">17 June 2019</time>
+                            <span class="bull">&bull;</span> 5 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="zexuano.github.io">zexuannotes</a> &copy; 2019</section>
+                <nav class="site-footer-nav">
+                    <a href="zexuano.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
