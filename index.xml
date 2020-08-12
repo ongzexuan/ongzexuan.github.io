@@ -2,85 +2,85 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>zexuannotes</title>
-    <link>zexuano.github.io/</link>
+    <link>ongzexuan.github.io/</link>
     <description>Recent content on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
     <lastBuildDate>Tue, 14 Jul 2020 00:49:17 -0400</lastBuildDate>
     
-	<atom:link href="zexuano.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ongzexuan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using Grafana, Prometheus, and PostgreSQL</title>
-      <link>zexuano.github.io/posts/prometheus-grafana-seai/</link>
+      <link>ongzexuan.github.io/posts/prometheus-grafana-seai/</link>
       <pubDate>Tue, 14 Jul 2020 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/prometheus-grafana-seai/</guid>
+      <guid>ongzexuan.github.io/posts/prometheus-grafana-seai/</guid>
       <description>Disclaimer: This honest review of using Grafana (and then Prometheus after I was too far in) was done for the SE4AI class by Christian Kaestner. I would link it here, but silly me cannot seem to get the hyperlink to work in the summary section.</description>
     </item>
     
     <item>
       <title>ETL on the Cheap with AWS</title>
-      <link>zexuano.github.io/posts/etl-on-the-cheap-with-aws/</link>
+      <link>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</link>
       <pubDate>Mon, 15 Jul 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/etl-on-the-cheap-with-aws/</guid>
+      <guid>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</guid>
       <description>Or how to be a an absolute scrooge using AWS as a student who ran out of GitHub Educate funds. Full of funny practices, such as putting long-lived functions in Lambdas, turning off the production database when not in use, and scheduling ETL on the clock without triggers.</description>
     </item>
     
     <item>
       <title>Zipf&#39;s Law Distribution of Skills Listed in Job Postings</title>
-      <link>zexuano.github.io/posts/zipf-law-distribution-skills/</link>
+      <link>ongzexuan.github.io/posts/zipf-law-distribution-skills/</link>
       <pubDate>Mon, 01 Jul 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/zipf-law-distribution-skills/</guid>
+      <guid>ongzexuan.github.io/posts/zipf-law-distribution-skills/</guid>
       <description>Look at this distribution of text, it looks suspiciously like Zipf&amp;rsquo;s law! I&amp;rsquo;m going to take that out of context and opine that it applies to this text too.</description>
     </item>
     
     <item>
       <title>Effectively Free ETL with Lambdas</title>
-      <link>zexuano.github.io/posts/effectively-free-etl-with-lambdas/</link>
+      <link>ongzexuan.github.io/posts/effectively-free-etl-with-lambdas/</link>
       <pubDate>Mon, 17 Jun 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/effectively-free-etl-with-lambdas/</guid>
+      <guid>ongzexuan.github.io/posts/effectively-free-etl-with-lambdas/</guid>
       <description>Who knew AWS Lambdas had a free tier? Life is great indeed. Here we rejoice over the magnimity of Bezos and talk about how to package our functions into Lambdas.</description>
     </item>
     
     <item>
       <title>Latex: Five Line Gloss for Linguistics Typesetting</title>
-      <link>zexuano.github.io/posts/five-line-glossing-expex/</link>
+      <link>ongzexuan.github.io/posts/five-line-glossing-expex/</link>
       <pubDate>Wed, 16 Jan 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/five-line-glossing-expex/</guid>
+      <guid>ongzexuan.github.io/posts/five-line-glossing-expex/</guid>
       <description>I&amp;rsquo;m not great with LaTex, but I need a five-line gloss for the conlang I&amp;rsquo;m building for Minecraft (for a class). Using the &lt;code&gt;expex&lt;/code&gt; package, we can bootstrap a five-line gloss from the tools it provides out of the box.</description>
     </item>
     
     <item>
       <title>Piazza Integration for Slack</title>
-      <link>zexuano.github.io/posts/unofficial-piazza-integration-slack/</link>
+      <link>ongzexuan.github.io/posts/unofficial-piazza-integration-slack/</link>
       <pubDate>Wed, 16 Jan 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/unofficial-piazza-integration-slack/</guid>
+      <guid>ongzexuan.github.io/posts/unofficial-piazza-integration-slack/</guid>
       <description>The homeworks haven&amp;rsquo;t come in for grading yet. Students complain that we don&amp;rsquo;t respond to Piazza questions quickly enough. I suppose if the questions fly directly into our Slack, that might speed things up a tad. Piazza doesn&amp;rsquo;t officially support an API, so I built around it!</description>
     </item>
     
     <item>
       <title>Thoughts on a Design Pattern for Facebook Chatbots</title>
-      <link>zexuano.github.io/posts/design-pattern-facebook-chatbot/</link>
+      <link>ongzexuan.github.io/posts/design-pattern-facebook-chatbot/</link>
       <pubDate>Wed, 18 Jul 2018 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/design-pattern-facebook-chatbot/</guid>
+      <guid>ongzexuan.github.io/posts/design-pattern-facebook-chatbot/</guid>
       <description>A compilation of post-mortem thoughts on building my first Facebook chat bot that is more than just a &amp;lsquo;Hello World&amp;rsquo;, mostly motivated that almost everyone seems to be just building a thing that works without much thought about the context.</description>
     </item>
     
     <item>
       <title>Project Malmo: Discrete Pathing Maze Solver</title>
-      <link>zexuano.github.io/posts/malmo-maze-solver/</link>
+      <link>ongzexuan.github.io/posts/malmo-maze-solver/</link>
       <pubDate>Thu, 04 Jan 2018 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/malmo-maze-solver/</guid>
+      <guid>ongzexuan.github.io/posts/malmo-maze-solver/</guid>
       <description>I&amp;rsquo;d like a Minecraft bot that cuts trees, mines coal, harvests wheat, digs holes, etc etc. I suppose we could start by trying to make one that stays alive!</description>
     </item>
     

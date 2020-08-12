@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>language on zexuannotes</title>
-    <link>zexuano.github.io/tags/language/</link>
+    <link>ongzexuan.github.io/tags/language/</link>
     <description>Recent content in language on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
     <lastBuildDate>Wed, 16 Jan 2019 00:49:17 -0400</lastBuildDate>
     
-	<atom:link href="zexuano.github.io/tags/language/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ongzexuan.github.io/tags/language/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Latex: Five Line Gloss for Linguistics Typesetting</title>
-      <link>zexuano.github.io/posts/five-line-glossing-expex/</link>
+      <link>ongzexuan.github.io/posts/five-line-glossing-expex/</link>
       <pubDate>Wed, 16 Jan 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/five-line-glossing-expex/</guid>
+      <guid>ongzexuan.github.io/posts/five-line-glossing-expex/</guid>
       <description>I&amp;rsquo;m not great with LaTex, but I need a five-line gloss for the conlang I&amp;rsquo;m building for Minecraft (for a class). Using the &lt;code&gt;expex&lt;/code&gt; package, we can bootstrap a five-line gloss from the tools it provides out of the box.</description>
     </item>
     

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dev on zexuannotes</title>
-    <link>zexuano.github.io/tags/dev/</link>
+    <link>ongzexuan.github.io/tags/dev/</link>
     <description>Recent content in Dev on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
     <lastBuildDate>Mon, 15 Jul 2019 00:49:17 -0400</lastBuildDate>
     
-	<atom:link href="zexuano.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ongzexuan.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ETL on the Cheap with AWS</title>
-      <link>zexuano.github.io/posts/etl-on-the-cheap-with-aws/</link>
+      <link>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</link>
       <pubDate>Mon, 15 Jul 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuano.github.io/posts/etl-on-the-cheap-with-aws/</guid>
+      <guid>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</guid>
       <description>Or how to be a an absolute scrooge using AWS as a student who ran out of GitHub Educate funds. Full of funny practices, such as putting long-lived functions in Lambdas, turning off the production database when not in use, and scheduling ETL on the clock without triggers.</description>
     </item>
     
