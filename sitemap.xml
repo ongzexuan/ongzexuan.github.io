@@ -4,12 +4,32 @@
   
   <url>
     <loc>ongzexuan.github.io/</loc>
-    <lastmod>2020-07-14T00:49:17-04:00</lastmod>
+    <lastmod>2020-08-17T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>ongzexuan.github.io/posts/migrating-to-hugo/</loc>
+    <lastmod>2020-08-17T00:49:17-04:00</lastmod>
   </url>
   
   <url>
     <loc>ongzexuan.github.io/posts/</loc>
-    <lastmod>2020-07-14T00:49:17-04:00</lastmod>
+    <lastmod>2020-08-17T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>ongzexuan.github.io/tags/dev/</loc>
+    <lastmod>2020-08-14T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>ongzexuan.github.io/posts/my-unraid-setup/</loc>
+    <lastmod>2020-08-14T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>ongzexuan.github.io/tags/</loc>
+    <lastmod>2020-08-14T00:49:17-04:00</lastmod>
   </url>
   
   <url>
@@ -28,17 +48,7 @@
   </url>
   
   <url>
-    <loc>ongzexuan.github.io/tags/dev/</loc>
-    <lastmod>2019-07-15T00:49:17-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</loc>
-    <lastmod>2019-07-15T00:49:17-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>ongzexuan.github.io/tags/</loc>
     <lastmod>2019-07-15T00:49:17-04:00</lastmod>
   </url>
   
@@ -74,6 +84,11 @@
   
   <url>
     <loc>ongzexuan.github.io/posts/malmo-maze-solver/</loc>
+    <lastmod>2018-01-04T00:49:17-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>ongzexuan.github.io/tags/projects/</loc>
     <lastmod>2018-01-04T00:49:17-04:00</lastmod>
   </url>
   

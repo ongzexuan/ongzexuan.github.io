@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>projects on zexuannotes</title>
+    <link>ongzexuan.github.io/tags/projects/</link>
+    <description>Recent content in projects on zexuannotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2018–2020, zexuannotes</copyright>
+    <lastBuildDate>Thu, 04 Jan 2018 00:49:17 -0400</lastBuildDate>
+    
+	<atom:link href="ongzexuan.github.io/tags/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Project Malmo: Discrete Pathing Maze Solver</title>
+      <link>ongzexuan.github.io/posts/malmo-maze-solver/</link>
+      <pubDate>Thu, 04 Jan 2018 00:49:17 -0400</pubDate>
+      
+      <guid>ongzexuan.github.io/posts/malmo-maze-solver/</guid>
+      <description>I&amp;rsquo;d like a Minecraft bot that cuts trees, mines coal, harvests wheat, digs holes, etc etc. I suppose we could start by trying to make one that stays alive!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="ongzexuan.github.iodarkgist.css" />    
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="ongzexuan.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/projects/">Projects</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">Migrating from Ghost to Hugo</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Why not Git commit my blog?</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        
+
+                        <section class="post-full-byline-meta">
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-128-08">17 August 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 6 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/migrating-to-hugo/feature_image.png" alt="Migrating from Ghost to Hugo" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>I don&rsquo;t really do front end, websites are kind of beyond me. I like to make things that spit out plaintext (like&hellip; APIs). My blog has been running on a Ghost installation on a Digital Ocean droplet for the last two years. It&rsquo;s probably the most lightweight blog CMS that I&rsquo;ve seen so far (I never want to see a Wordpress site again). One feature that it doesn&rsquo;t have is a way to manage the content like I manage code on a regular basis. I suppose I could version control the markdown documents, and have some mechanism for managing the images, and ensuring the links don&rsquo;t get broken, but then there&rsquo;d be two sources of truth to quote a <a href="https://yish.sg/post/hello-world/">friend of mine</a>. I was thus introduced to an alternative called <a href="https://gohugo.io/">Hugo</a> where I could do just that, committing my blog content to GitHub.</p>
+<p>Since it was going to be a set of static pages, I figured I could also migrate my blog from Digital Ocean to GitHub pages, and save 5 bucks a month.</p>
+<h3 id="unpaid-plug-for-digital-ocean">Unpaid Plug for Digital Ocean</h3>
+<p>Since we are saying bon voyage to the Digital Ocean, I must say that DO has been great as far as hosting is concerned. Where else can you get a reasonably reliable VPS for 5 bucks a month that doesn&rsquo;t suck or sound shady? In a quest to outdo that price bar I have rented random servers in Texas from Low End Box, doing well at around 3.5 bucks, but then I always run out of RAM when running Python scripts on it, so productivity gets poured into reducing memory footprint, and scheduling jobs so they don&rsquo;t consume all the RAM and crash all of Python.</p>
+<p>Reflecting on the price, at this point in my life, 5 bucks a month is pretty affordable. Back in high school, I remember frustrating over choosing multiple options whose difference in price per month was in the order of 50 cents. I am happy and grateful that I can shell out 5 bucks a month for a server today. GitHub also offers hosting of static pages for free. What a time to be alive.</p>
+<p>I guess that wasn&rsquo;t so much of a plug.</p>
+<h2 id="content-management-workflow">Content Management Workflow</h2>
+<p>With Hugo, the workflow for managing content is greatly simplified. First I create a new markdown document in the <code>posts</code> folder, and then I most probably create a new corresponding folder with the same name in the <code>static</code> directory to host images. That&rsquo;s pretty much it actually.</p>
+<p>I have two separate GitHub repos setup for this, the <a href="https://github.com/ongzexuan/blog">first repo</a> holds the entire source code of the blog. The <a href="https://github.com/ongzexuan/ongzexuan.github.io">second repo</a>, the actual GitHub page, holds the rendered pages (the <code>public</code> folder of Hugo). To push content therefore, just requires committing to both repos, which can be done with a simple script I borrowed from Hugo.</p>
+<h2 id="theme">Theme</h2>
+<p>I quite liked the original Ghost theme I had (Casper 2). It was simple and provided the right balance for the strange mix of life choices I have (there&rsquo;s the code, the plants, the food, the occasional photo). A nice person ported the <a href="https://github.com/jonathanjanssens/hugo-casper3">Casper 3 theme over to Hugo</a>, so I just manually ported over the small number of posts I had. I was in particular annoyed at the fact that the theme was in black, and played around with the CSS settings before realizing that I had dark mode enabled.</p>
+<p>There were a number of things that didn&rsquo;t work out of the box and were not particularly well documented.</p>
+<h4 id="images">Images</h4>
+<p>Adding images can be done using a shortcode as follows (compress the handlebars):</p>
+<pre><code>{ { &lt; figure src=&quot;/malmo-maze-solver/moving_small.gif&quot; caption=&quot;Bot repeatedly falling into the lava.&quot; &gt; } }
+</code></pre><h4 id="github-gists">Github Gists</h4>
+<p>Adding gists is a bit more complicated. First add a shortcode under <code>layouts &gt; shortcodes &gt; gist.html</code>. In that file specify the JS.</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://gist.github.com/{{ .Get 0 }}.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>Then you can add gists using the shortcode with a gist id:</p>
+<pre><code>{ {&lt;gist 07415be703d5576f9433ddb0730f7766&gt;} }
+</code></pre><p>The gist CSS layout does not play well with dark mode. It looks really ugly. I overwrote that with some custom CSS I borrowed from a source I lost, which I put under the <code>static</code> folder and import in my site header:</p>
+<script type="text/javascript" src="http://gist.github.com/c77799e2f1f54569c034a9ceeca85e3e.js"></script>
+<h4 id="front-matter">Front Matter</h4>
+<p>Post metadata, or what Hugo calls front matter, are not particularly well documented. The most useful front matter are, after some digging:</p>
+<ul>
+<li><code>feature_image</code> - for addding a featured image to the post head, and on the index page.</li>
+<li><code>summary</code> - adds a summary that overrides the badly generated default summary, to be displayed on the index page.</li>
+<li><code>tags</code> - adds a list of tags, but the default CSS allows for only the first tag to be displayed. I can live with that for now.</li>
+</ul>
+<p>To add featured images to</p>
+<h4 id="author-page">Author Page</h4>
+<p>The theme doesn&rsquo;t seem to have a default author page that works. To be honest there&rsquo;s only one author here so really I just need another page that&rsquo;s not a post. I can&rsquo;t seem to find a way to do that so I created the author taxonomy (another Hugo term). This required me to add my author metadata (i.e. my metadata) under <code>content &gt; authors &gt; zexuano &gt; _index.md</code>. I also had to create a design for this page under <code>layouts &gt; authors &gt; list.html</code>. You may also need to create an empty folder in <code>authors</code> with your author name.</p>
+<h4 id="other-annoying-fixes">Other Annoying Fixes</h4>
+<p>Some features were not provided out of the box so I hardcoded some items into the theme itself. This includes adding a favicon to the page, changing the site title to a static one instead of a dynamically generated one per post, and adding icons for post authors. If you&rsquo;d like to know how I fixed something, you can take a look directly at the <a href="https://github.com/ongzexuan/blog">source code of the blog</a> and do a diff, or just ask me.</p>
+<h4 id="before-and-after">Before and After</h4>
+<p>There are a number of small but nice changes to the layout which I am quite pleased with.</p>
+<figure>
+    <img src="/migrating-to-hugo/old.png"
+         alt="Old layout, with obnoxiously sized title, a non-recognizable image icon, and a date that&amp;rsquo;s kind of in a strange place, with the summary enlarged for some reason."/> <figcaption>
+            <p>Old layout, with obnoxiously sized title, a non-recognizable image icon, and a date that&rsquo;s kind of in a strange place, with the summary enlarged for some reason.</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img src="/migrating-to-hugo/new.png"
+         alt="New layout, with obnoxiously sized title, text in the nav bar, nice looking date with an author icon, and no enlarged summary."/> <figcaption>
+            <p>New layout, with obnoxiously sized title, text in the nav bar, nice looking date with an author icon, and no enlarged summary.</p>
+        </figcaption>
+</figure>
+
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>I believe this is as close as I&rsquo;m going to get in reducing the inertia of writing new posts caused by friction between typing something and pushing it out there. The changes I&rsquo;ve made relative to the old Ghost instance also make it much easier to write book reviews, a task for which has been left in the back burner for some time. Expect to see some in the future!</p>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/my-unraid-setup/">
+                <img class="post-card-image"src="/my-unraid-setup/unraid.png" alt="My Unraid Setup"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/my-unraid-setup/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">dev</div>
+                    
+
+                    <h2 class="post-card-title">My Unraid Setup</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Documenting going down the rabbit hole after looking for a basic hypervisor.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2020-128-08">14 August 2020</time>
+                            <span class="bull">&bull;</span> 5 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="ongzexuan.github.io">zexuannotes</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="ongzexuan.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

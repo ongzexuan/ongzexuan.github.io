@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
-    <lastBuildDate>Tue, 14 Jul 2020 00:49:17 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 00:49:17 -0400</lastBuildDate>
     
 	<atom:link href="ongzexuan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Migrating from Ghost to Hugo</title>
+      <link>ongzexuan.github.io/posts/migrating-to-hugo/</link>
+      <pubDate>Mon, 17 Aug 2020 00:49:17 -0400</pubDate>
+      
+      <guid>ongzexuan.github.io/posts/migrating-to-hugo/</guid>
+      <description>Why not Git commit my blog?</description>
+    </item>
+    
+    <item>
+      <title>My Unraid Setup</title>
+      <link>ongzexuan.github.io/posts/my-unraid-setup/</link>
+      <pubDate>Fri, 14 Aug 2020 00:49:17 -0400</pubDate>
+      
+      <guid>ongzexuan.github.io/posts/my-unraid-setup/</guid>
+      <description>Documenting going down the rabbit hole after looking for a basic hypervisor.</description>
+    </item>
     
     <item>
       <title>Using Grafana, Prometheus, and PostgreSQL</title>

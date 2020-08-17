@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="ongzexuan.github.iodarkgist.css" />    
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="ongzexuan.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/projects/">Projects</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/ongzexuan.github.io/tags/dev">dev</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">My Unraid Setup</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Documenting going down the rabbit hole after looking for a basic hypervisor.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-128-08">14 August 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 5 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/my-unraid-setup/unraid.png" alt="My Unraid Setup" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>In the last year or so I&rsquo;ve found myself in greater need of GPU resources for running various deep learning models. Instead of paying for AWS instances, which is the default supported choice of the various classes I was taking, I thought it made more sense to build a server to do that and pocket the AWS credits. The pros are that I appear to save money. The cons are that I have to deal with all the problems of setting up, running, and maintaining a server, but if you put a positive spin on problems self-imposed you can call it education, which I will likely pay for with the rabbit-hole-ism of such projects that are likely to end up costing more in the long run.</p>
+<p>Anyway after putting it off for a while, experiencing a Black Friday where for the first time I bought a CPU and a pillow case for their thread counts (w.r.t to price of course), and then subsequently having some minor success setting up and running my home server, I thought I would document some parts of it here.</p>
+<h3 id="choice-of-os">Choice of OS</h3>
+<p>As is usually the case, I initially reached too far and felt I needed a bare metal hypervisor to do whatever it was I wanted to do. I went with Proxmox because it was supposedly simple and easy, but my inexperience with such networking work left me only able to run a few VMs and not much else.</p>
+<p>After an embarssing defeat by the networking gang, I settled for turning the server into a NAS, to backup some photos and data. It turns out that NASes these days can run containers and VMs, which is a pleasant surprise. Unraid came out as a simpler choice, with a free license for 30 days, thereafter until shutdown, which was forcibly imposed on me when a tree fell on my power line during a storm (if you look closely at the picture above you&rsquo;ll see that I have a legit license now).</p>
+<h3 id="computationally-heavy-workloads-are-gateway-drugs">Computationally Heavy Workloads are Gateway Drugs</h3>
+<p>How does one get from running some models on another machine to setting up another server entirely? The rabbit hole works approximately as follows:</p>
+<ol start="0">
+<li>I want to stop paying for AWS (which I just realized seems to be a recurring theme on this page).</li>
+<li>But I need a machine to run models, preferably not my main machine so I could do other things while waiting.</li>
+<li>I need another machine (oh look let&rsquo;s conveniently buy a new machine on Black Friday so we can obsolete the old one and make it a server)</li>
+<li>Wait we can have a server? Now we can run multiple services on the server!</li>
+<li>Let&rsquo;s&hellip; attempt to do that the correct way by running multiple containers/VMs.</li>
+<li>Ok I need a hypervisor.</li>
+<li>Do I really need a hypervisor for running deep learning models?</li>
+<li>Yes. Actually no. Ok yes.</li>
+<li>Now let me add lots of services to justify having put a hypervisor on this machine.</li>
+</ol>
+<h3 id="what-it-does">What It Does</h3>
+<p>Having run the server for almost half a year now, here&rsquo;s a number of things that the server does do, and quite effectively so.</p>
+<ol>
+<li>Runs a music streaming server (Airsonic) so I can stop paying for Spotify.</li>
+<li>Runs a bunch of Scrapy bots to collect data to build datasets so that I can stop paying for ScrapingHub and S3.</li>
+<li>Runs a VPN so that I can fix and access the network from anywhere.</li>
+<li>Runs an Apache Airflow VM for overkill scheduling of jobs that need to run on a regular-ish basis.</li>
+<li>Runs a few databases for personal data collection (I collate all my credit card data in a single place here, but that&rsquo;s a post for another time), and for school work.</li>
+<li>Backup my data, work like a NAS like, what it was invented for.</li>
+</ol>
+<h3 id="what-it-doesnt-do">What It Doesn&rsquo;t Do</h3>
+<ol>
+<li>Run deep learning models</li>
+</ol>
+<p>It turns out the original use case has dwindled in value since the idea was mooted (to myself). I still run a model or two every now and then, but not at the frequency that I had originally anticipated, and certainly not at a level that justifies an external machine for it. Oops, but hey we have a fancy server now!</p>
+<h3 id="i-save-money-right">I Save Money&hellip; Right?</h3>
+<p>I can say with certainty that the reduction of OPEX from unsubscribing from various online subscriptions has definitely saved me money. Furthermore, the place I currently stay in has a fixed electricity bill, so there&rsquo;s no marginal electrical expense from this server.</p>
+<p>That being said, the OPEX costs have been convereted into CAPEX, which seems to be the opposite of the general trend these days. I lost a cache drive the other day, and while replacing it was easy and painless (slide in a new drive and turn on the drive array), it of course cost some money, which sort of set me back 6 months of supposed savings.</p>
+<p>A common response when I tell people that I go through the trouble of doing all this so that I can unsubscribe from Spotify is that it&rsquo;s far more trouble than it is worth, especially when you consider the value of my free time. I have to say I wholeheartedly agree (especially if it&rsquo;s just for Spotify), and it sure felt that way for the most part when I started doing this. However, since setting up my Unraid server I&rsquo;ve found it really easy to deploy new services for any new projects I may have, non-business of course. Need a new database? Just spin up a new container or VM. Need a new backup location for service X? Just create a new folder in the NAS. This feels like a much cleaner separation of work with respect to my personal computer. It&rsquo;s also really easy to operationalize some script which would have otherwise been a one-off function to be scheduled manually. For example, I have triggers that upload a copy of my music to YouTube Music (previously Google Play Music) whenever new data comes in.</p>
+<h3 id="more-stuff">More Stuff</h3>
+<p>I&rsquo;ll go into greater detail about some of the more interesting things I&rsquo;m running on this machine in subsequent posts.</p>
+
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/ongzexuan.github.io/tags/dev">dev</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/prometheus-grafana-seai/">
+                <img class="post-card-image"src="/prometheus-grafana-seai/feature.png" alt="Using Grafana, Prometheus, and PostgreSQL"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/prometheus-grafana-seai/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Using Grafana, Prometheus, and PostgreSQL</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Disclaimer: This honest review of using Grafana (and then Prometheus after I was too far in) was done for the SE4AI class by Christian Kaestner. I would link it here, but silly me cannot seem to get the hyperlink to work in the summary section.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2020-127-07">14 July 2020</time>
+                            <span class="bull">&bull;</span> 12 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/migrating-to-hugo/">
+                <img class="post-card-image"src="/migrating-to-hugo/feature_image.png" alt="Migrating from Ghost to Hugo"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/migrating-to-hugo/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Migrating from Ghost to Hugo</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Why not Git commit my blog?</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip"></div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span></span>
+                        <span class="post-card-byline-date"><time datetime="2020-128-08">17 August 2020</time>
+                            <span class="bull">&bull;</span> 6 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="ongzexuan.github.io">zexuannotes</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="ongzexuan.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

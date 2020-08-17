@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
-    <lastBuildDate>Mon, 15 Jul 2019 00:49:17 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2020 00:49:17 -0400</lastBuildDate>
     
 	<atom:link href="ongzexuan.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Dev</title>
       <link>ongzexuan.github.io/tags/dev/</link>
-      <pubDate>Mon, 15 Jul 2019 00:49:17 -0400</pubDate>
+      <pubDate>Fri, 14 Aug 2020 00:49:17 -0400</pubDate>
       
       <guid>ongzexuan.github.io/tags/dev/</guid>
       <description></description>
@@ -27,6 +27,15 @@
       <pubDate>Wed, 16 Jan 2019 00:49:17 -0400</pubDate>
       
       <guid>ongzexuan.github.io/tags/language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>projects</title>
+      <link>ongzexuan.github.io/tags/projects/</link>
+      <pubDate>Thu, 04 Jan 2018 00:49:17 -0400</pubDate>
+      
+      <guid>ongzexuan.github.io/tags/projects/</guid>
       <description></description>
     </item>
     
