@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" type="text/css" href="ongzexuan.github.iodarkgist.css" />    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120020548-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="ongzexuan.github.io">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/projects/">Projects</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="ongzexuan.github.io/tags/life/">Life</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/ongzexuan.github.io/tags/dev">dev</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">ETL My Credit Cards to GSheets</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Data&rsquo;s not very useful sitting in a database collecting static and dust. We&rsquo;re gonna take that the credit card transaction data from last week and gift it to Google (sheets). For desserts we also slap Slack notifications onto the Airflow instance.</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-129-09">1 September 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/airflow-etl-gsheets/feature.png" alt="ETL My Credit Cards to GSheets" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>Previously we described setting up a VM running Apache Airflow to collect credit card data in a Postgres database. The data&rsquo;s not very useful sitting in a database only, so we&rsquo;d have to take it out and put it somewhere. I have most of my budget and &lsquo;money things&rsquo; worked out on a Google Spreadsheet (or GSheet), and what I&rsquo;d like to do is to pipe this transaction data into the sheet to add another perspective to my accounting. The budget reflects what we&rsquo;d like to have occur in reality. The transactions, well, they reflect what happened when great deals for hard disk drives pop up on Black Friday.</p>
+<h3 id="new-task-exporting-to-gsheets">New Task: Exporting to GSheets</h3>
+<p>I&rsquo;ve updated the <a href="https://github.com/ongzexuan/airflow-transaction-dags">repo</a> with a new task that exports the data from Postgres to GSheets.</p>
+<p>To actually perform the export of data to Gsheets, we use the <code>gspread</code> package. I highly recommend it, it is simple and straightforward. The strange thing about trying to use Google&rsquo;s API is that the documentation is everywhere but where I need it. The OAuth flow works, but it grants me only access to the API, and not my sheet (which for obvious reasons we don&rsquo;t make public). The <code>gspread</code> method is much easier:</p>
+<ol>
+<li>Create a Service Account on the developer console, and download the credentials (keys) as a JSON file.</li>
+<li>Share the private GSheet with the email address indicated on the Service Account, enabling read write access.</li>
+<li>Put the <code>credentials.json</code> file in the appropriate location and link <code>gspread</code> to it when initializing, and done!</li>
+</ol>
+<p>Accessing the sheet and making edits is really simple with this package:</p>
+<pre><code>import gspread
+
+# Get access to worksheet
+gc = gspread.service_account(filename=CREDENTIALS_FILE)
+spreadsheet = gc.open(&quot;My Spreadsheet Name&quot;)
+worksheet = spreadsheet.worksheet(&quot;My Worksheet Name&quot;)
+
+# Append data
+my_data = [&quot;something&quot;]
+worksheet.append_row(my_data)
+
+</code></pre><p>I&rsquo;m quite happy with this package. My minor unimportant complaint is that without looking under the hood it&rsquo;s not immediately obvious how many API calls are made to Google&rsquo;s server for each function call. This has led to me exhausting the API rate limit when running backfill tasks too fast, but that&rsquo;s probably on me.</p>
+<h3 id="backfilling-with-new-tasks">Backfilling With New Tasks</h3>
+<p>Previously we had 4 single independent tasks, so there was nothing DAG-gy about it. Now we finally add a dependency - we export our data from the database to GSheets once we finished collecting and transforming the data from all sources.</p>
+<figure>
+    <img src="/airflow-etl-gsheets/dag.png"
+         alt="Our now very complex DAG."/> <figcaption>
+            <p>Our now very complex DAG.</p>
+        </figcaption>
+</figure>
+
+<p>This transition from 4 tasks to 5 tasks is handled fine by Airflow. If we now go back and look at old DAG runs, we&rsquo;ll notice that there is now a new downstream dependent task just as in the image, but because it was a past DAG run, that task was never run. If we wish to we can run a backfill specifically on this task. One minor downside is that I had assumed that because I was appending only to my spreadsheet, the data on the spreadsheet will be sorted by date naturally. With backfills running multiple task instances in parallel however, the finish times are non-deterministic, so the output is appended with imperfect sorting. This is a small problem that can be fixed by sorting the sheet, since this is a one-time problem.</p>
+<p>After performing our backfill to the start of the year, we can have a look at the worksheet in the GSheet we&rsquo;ve been exporting to.</p>
+<figure>
+    <img src="/airflow-etl-gsheets/gsheet.png"
+         alt="The GSheet now chock full of data."/> <figcaption>
+            <p>The GSheet now chock full of data.</p>
+        </figcaption>
+</figure>
+
+<h3 id="slapping-slack-on-it">Slapping Slack on it</h3>
+<p>This is probably a good point in time to add some monitoring to the Unraid server we&rsquo;ve been running this thing on. We&rsquo;re running a number of containers and VMs, some of which do things on a regular basis, so it&rsquo;d be good to know if they succeeded or failed without having to login and check. Slack is probably the best option, so we setup a Slack workspace for our server, added an Airflow bot user, and passed the webhook URL to a Airflow Connection named <code>SLACK_CONN_ID</code>.</p>
+<p>I borrowed this <a href="https://github.com/ongzexuan/airflow-transaction-dags/blob/master/slack_operator.py">nice pair of slack operators</a> - there&rsquo;s one for success and one for failure. To integrate this into our DAG, we invoke the <code>on_success_callback</code> and <code>on_failure_callback</code> option for the <code>Operator</code>s. Specifically, at the very last task, we add the two respective calls into the keyword arguments as follows:</p>
+<pre><code># Task: Export data to GSheets
+export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
+                                    python_callable=export_to_gsheet,
+                                    provide_context=True,
+                                    on_success_callback=task_success_slack_alert,
+                                    on_failure_callback=task_fail_slack_alert)
+</code></pre><p>Then, when we do a test run of the DAG, we get some results.</p>
+<figure>
+    <img src="/airflow-etl-gsheets/slack.png"
+         alt="Slack notifications for the local Airflow instance. More notifications coming soon!"/> <figcaption>
+            <p>Slack notifications for the local Airflow instance. More notifications coming soon!</p>
+        </figcaption>
+</figure>
+
+
+                </div>                
+            </section>
+
+            <center>
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "zexuannotes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </center>
+
+        </article>            
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/ongzexuan.github.io/tags/dev">dev</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/setting-up-airflow-in-vm/">
+                <img class="post-card-image"src="/setting-up-airflow-in-vm/airflow_interface.png" alt="Setting Up Apache Airflow in a VM"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/setting-up-airflow-in-vm/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Setting Up Apache Airflow in a VM</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>I want all my credit card transaction data in one place. I&rsquo;m going to use Airflow to schedule jobs that use the Plaid API to extract and process this data on a daily basis.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip"></div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span></span>
+                        <span class="post-card-byline-date"><time datetime="2020-128-08">19 August 2020</time>
+                            <span class="bull">&bull;</span> 8 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="ongzexuan.github.io">zexuannotes</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="ongzexuan.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

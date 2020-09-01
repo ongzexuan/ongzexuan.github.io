@@ -296,13 +296,11 @@ Another thing I like about Grafana is that its interface is quite simply and eas
 <h3 id="not-so-nice-things-about-grafana">Not so nice things about Grafana</h3>
 <p>I think the key complaint that most people have about Grafana, looking around on the interwebs, is that the data storage component has been separated entirely from the visualization process. If you recall, this is why we brought in Prometheus earlier in this example. It&rsquo;s a reasonable complaint - it may not make sense to run two or three extra containers just for monitoring a simple service that may only take up one container. In fact for this example, one might argue that visualizing the queries on Prometheus was all fine and good. Granted, you couldn&rsquo;t have many graphs on one page and it didn&rsquo;t look as fancy, but it may have well been sufficient for the job. In the end, I think it comes down to a matter of scale. Personally I quite like the separation between visualization and data collection, and I think I&rsquo;ll keep it that way.</p>
 
-                </div>
-            </section>            
+                </div>                
+            </section>
 
-        </article>    
-
-        <center>
-            <div id="disqus_thread"></div>
+            <center>
+                <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
@@ -321,8 +319,10 @@ Another thing I like about Grafana is that its interface is quite simply and eas
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>    
-        </center>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </center>
+
+        </article>            
 
     </div>
 </main>
