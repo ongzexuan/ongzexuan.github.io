@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
     <link rel="stylesheet" type="text/css" href="ongzexuan.github.iodarkgist.css" />    
 
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120020548-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
 </head>
 <body class=" post-template ">
 
@@ -284,9 +297,32 @@ Another thing I like about Grafana is that its interface is quite simply and eas
 <p>I think the key complaint that most people have about Grafana, looking around on the interwebs, is that the data storage component has been separated entirely from the visualization process. If you recall, this is why we brought in Prometheus earlier in this example. It&rsquo;s a reasonable complaint - it may not make sense to run two or three extra containers just for monitoring a simple service that may only take up one container. In fact for this example, one might argue that visualizing the queries on Prometheus was all fine and good. Granted, you couldn&rsquo;t have many graphs on one page and it didn&rsquo;t look as fancy, but it may have well been sufficient for the job. In the end, I think it comes down to a matter of scale. Personally I quite like the separation between visualization and data collection, and I think I&rsquo;ll keep it that way.</p>
 
                 </div>
-            </section>
+            </section>            
 
-        </article>
+        </article>    
+
+        <center>
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "ongzexuan" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>    
+        </center>
 
     </div>
 </main>
