@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>zexuannotes</title>
-    <link>zexuannotes.com/authors/zexuano/</link>
+    <link>ongzexuan.github.io/authors/zexuano/</link>
     <description>Recent content on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
     <lastBuildDate>Wed, 17 Jun 2020 00:49:17 -0400</lastBuildDate>
     
-	<atom:link href="zexuannotes.com/authors/zexuano/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ongzexuan.github.io/authors/zexuano/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

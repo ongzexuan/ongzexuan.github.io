@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>dev on zexuannotes</title>
-    <link>zexuannotes.com/tags/dev/</link>
+    <link>ongzexuan.github.io/tags/dev/</link>
     <description>Recent content in dev on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
     <lastBuildDate>Tue, 01 Sep 2020 00:49:17 -0400</lastBuildDate>
     
-	<atom:link href="zexuannotes.com/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ongzexuan.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ETL My Credit Cards to GSheets</title>
-      <link>zexuannotes.com/posts/airflow-etl-gsheets/</link>
+      <link>ongzexuan.github.io/posts/airflow-etl-gsheets/</link>
       <pubDate>Tue, 01 Sep 2020 00:49:17 -0400</pubDate>
       
-      <guid>zexuannotes.com/posts/airflow-etl-gsheets/</guid>
+      <guid>ongzexuan.github.io/posts/airflow-etl-gsheets/</guid>
       <description>Data&amp;rsquo;s not very useful sitting in a database collecting static and dust. We&amp;rsquo;re gonna take that the credit card transaction data from last week and gift it to Google (sheets). For desserts we also slap Slack notifications onto the Airflow instance.</description>
     </item>
     
     <item>
       <title>My Unraid Setup</title>
-      <link>zexuannotes.com/posts/my-unraid-setup/</link>
+      <link>ongzexuan.github.io/posts/my-unraid-setup/</link>
       <pubDate>Fri, 14 Aug 2020 00:49:17 -0400</pubDate>
       
-      <guid>zexuannotes.com/posts/my-unraid-setup/</guid>
+      <guid>ongzexuan.github.io/posts/my-unraid-setup/</guid>
       <description>Documenting going down the rabbit hole after looking for a basic hypervisor.</description>
     </item>
     
     <item>
       <title>ETL on the Cheap with AWS</title>
-      <link>zexuannotes.com/posts/etl-on-the-cheap-with-aws/</link>
+      <link>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</link>
       <pubDate>Mon, 15 Jul 2019 00:49:17 -0400</pubDate>
       
-      <guid>zexuannotes.com/posts/etl-on-the-cheap-with-aws/</guid>
+      <guid>ongzexuan.github.io/posts/etl-on-the-cheap-with-aws/</guid>
       <description>Or how to be a an absolute scrooge using AWS as a student who ran out of GitHub Educate funds. Full of funny practices, such as putting long-lived functions in Lambdas, turning off the production database when not in use, and scheduling ETL on the clock without triggers.</description>
     </item>
     
