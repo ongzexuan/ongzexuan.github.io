@@ -107,7 +107,7 @@ if (!doNotTrack) {
                             
                             <div class="byline-meta-content">
                                 <time class="byline-meta-date" datetime="2020-129-09">1 September 2020</time>
-                                <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 1 min read</span>
                             </div>
                         </section>
 
@@ -127,61 +127,7 @@ if (!doNotTrack) {
                 <div class="post-content">
                     <p>Previously we described setting up a VM running Apache Airflow to collect credit card data in a Postgres database. The data&rsquo;s not very useful sitting in a database only, so we&rsquo;d have to take it out and put it somewhere. I have most of my budget and &lsquo;money things&rsquo; worked out on a Google Spreadsheet (or GSheet), and what I&rsquo;d like to do is to pipe this transaction data into the sheet to add another perspective to my accounting. The budget reflects what we&rsquo;d like to have occur in reality. The transactions, well, they reflect what happened when great deals for hard disk drives pop up on Black Friday.</p>
 <h3 id="new-task-exporting-to-gsheets">New Task: Exporting to GSheets</h3>
-<p>I&rsquo;ve updated the <a href="https://github.com/ongzexuan/airflow-transaction-dags">repo</a> with a new task that exports the data from Postgres to GSheets.</p>
-<p>To actually perform the export of data to Gsheets, we use the <code>gspread</code> package. I highly recommend it, it is simple and straightforward. The strange thing about trying to use Google&rsquo;s API is that the documentation is everywhere but where I need it. The OAuth flow works, but it grants me only access to the API, and not my sheet (which for obvious reasons we don&rsquo;t make public). The <code>gspread</code> method is much easier:</p>
-<ol>
-<li>Create a Service Account on the developer console, and download the credentials (keys) as a JSON file.</li>
-<li>Share the private GSheet with the email address indicated on the Service Account, enabling read write access.</li>
-<li>Put the <code>credentials.json</code> file in the appropriate location and link <code>gspread</code> to it when initializing, and done!</li>
-</ol>
-<p>Accessing the sheet and making edits is really simple with this package:</p>
-<pre><code>import gspread
-
-# Get access to worksheet
-gc = gspread.service_account(filename=CREDENTIALS_FILE)
-spreadsheet = gc.open(&quot;My Spreadsheet Name&quot;)
-worksheet = spreadsheet.worksheet(&quot;My Worksheet Name&quot;)
-
-# Append data
-my_data = [&quot;something&quot;]
-worksheet.append_row(my_data)
-
-</code></pre><p>I&rsquo;m quite happy with this package. My minor unimportant complaint is that without looking under the hood it&rsquo;s not immediately obvious how many API calls are made to Google&rsquo;s server for each function call. This has led to me exhausting the API rate limit when running backfill tasks too fast, but that&rsquo;s probably on me.</p>
-<h3 id="backfilling-with-new-tasks">Backfilling With New Tasks</h3>
-<p>Previously we had 4 single independent tasks, so there was nothing DAG-gy about it. Now we finally add a dependency - we export our data from the database to GSheets once we finished collecting and transforming the data from all sources.</p>
-<figure>
-    <img src="/airflow-etl-gsheets/dag.png"
-         alt="Our now very complex DAG."/> <figcaption>
-            <p>Our now very complex DAG.</p>
-        </figcaption>
-</figure>
-
-<p>This transition from 4 tasks to 5 tasks is handled fine by Airflow. If we now go back and look at old DAG runs, we&rsquo;ll notice that there is now a new downstream dependent task just as in the image, but because it was a past DAG run, that task was never run. If we wish to we can run a backfill specifically on this task. One minor downside is that I had assumed that because I was appending only to my spreadsheet, the data on the spreadsheet will be sorted by date naturally. With backfills running multiple task instances in parallel however, the finish times are non-deterministic, so the output is appended with imperfect sorting. This is a small problem that can be fixed by sorting the sheet, since this is a one-time problem.</p>
-<p>After performing our backfill to the start of the year, we can have a look at the worksheet in the GSheet we&rsquo;ve been exporting to.</p>
-<figure>
-    <img src="/airflow-etl-gsheets/gsheet.png"
-         alt="The GSheet now chock full of data."/> <figcaption>
-            <p>The GSheet now chock full of data.</p>
-        </figcaption>
-</figure>
-
-<h3 id="slapping-slack-on-it">Slapping Slack on it</h3>
-<p>This is probably a good point in time to add some monitoring to the Unraid server we&rsquo;ve been running this thing on. We&rsquo;re running a number of containers and VMs, some of which do things on a regular basis, so it&rsquo;d be good to know if they succeeded or failed without having to login and check. Slack is probably the best option, so we setup a Slack workspace for our server, added an Airflow bot user, and passed the webhook URL to a Airflow Connection named <code>SLACK_CONN_ID</code>.</p>
-<p>I borrowed this <a href="https://github.com/ongzexuan/airflow-transaction-dags/blob/master/slack_operator.py">nice pair of slack operators</a> - there&rsquo;s one for success and one for failure. To integrate this into our DAG, we invoke the <code>on_success_callback</code> and <code>on_failure_callback</code> option for the <code>Operator</code>s. Specifically, at the very last task, we add the two respective calls into the keyword arguments as follows:</p>
-<pre><code># Task: Export data to GSheets
-export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
-                                    python_callable=export_to_gsheet,
-                                    provide_context=True,
-                                    on_success_callback=task_success_slack_alert,
-                                    on_failure_callback=task_fail_slack_alert)
-</code></pre><p>Then, when we do a test run of the DAG, we get some results.</p>
-<figure>
-    <img src="/airflow-etl-gsheets/slack.png"
-         alt="Slack notifications for the local Airflow instance. More notifications coming soon!"/> <figcaption>
-            <p>Slack notifications for the local Airflow instance. More notifications coming soon!</p>
-        </figcaption>
-</figure>
-
+<p>I&rsquo;ve updated the [</p>
 
                 </div>                
             </section>
@@ -279,14 +225,14 @@ export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
  ">
 
         
-            <a class="post-card-image-link" href="ongzexuan.github.io/posts/nextcloud-unraid/">
-                <img class="post-card-image"src="/nextcloud-unraid/feature.png" alt="Setting up Nextcloud on Unraid"/>
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/airflow-etl-gsheets/">
+                <img class="post-card-image"src="/airflow-etl-gsheets/feature.png" alt="ETL My Credit Cards to GSheets"/>
             </a>
         
     
         <div class="post-card-content">
     
-            <a class="post-card-content-link" href="ongzexuan.github.io/posts/nextcloud-unraid/">
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/airflow-etl-gsheets/">
     
                 <header class="post-card-header">
                     
@@ -294,11 +240,11 @@ export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
                         <div class="post-card-primary-tag">dev</div>
                     
 
-                    <h2 class="post-card-title">Setting up Nextcloud on Unraid</h2>
+                    <h2 class="post-card-title">ETL My Credit Cards to GSheets</h2>
                 </header>
     
                 <section class="post-card-excerpt">
-                    <p>President&rsquo;s day weekend project - get my photos off Google!</p>
+                    <p>Data&rsquo;s not very useful sitting in a database collecting static and dust. We&rsquo;re gonna take that the credit card transaction data from last week and gift it to Google (sheets). For desserts we also slap Slack notifications onto the Airflow instance.</p>
                 </section>
     
             </a>
@@ -312,7 +258,7 @@ export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
                     </ul>
                     <div class="post-card-byline-content">
                         <span>Ze Xuan Ong</span>
-                        <span class="post-card-byline-date"><time datetime="2021-122-02">15 February 2021</time>
+                        <span class="post-card-byline-date"><time datetime="2020-129-09">1 September 2020</time>
                             <span class="bull">&bull;</span> 4 min read</span>
                     </div>
                 </footer>
