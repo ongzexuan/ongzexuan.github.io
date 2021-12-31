@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -128,9 +128,8 @@ if (!doNotTrack) {
 <p>The raw skills data and the following charts can be found <a href="https://github.com/ongzexuan/jobsbank-skills">here</a>.</p>
 <h3 id="counts">Counts</h3>
 <p>First I looked at the discrete counts of the skills. The following chart shows the true and predicted counts of the top 250 most frequently occurring skills. The predicted counts were calculated by taking the reciprocal of the rank multiplied by the highest true count value. I decided to cut off the graph at 250 ranks to better accentuate the shape of the curve at smaller rank values, which is really what we&rsquo;re after anyway.</p>
-<figure>
-    <img src="/zipf-law-distribution-skills/zipf_law_count.png"
-         alt="True count of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/> <figcaption>
+<figure><img src="/zipf-law-distribution-skills/zipf_law_count.png"
+         alt="True count of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/><figcaption>
             <p>True count of skills and predicted count of skills (based on reciprocal rank) against rank order of skill.</p>
         </figcaption>
 </figure>
@@ -152,9 +151,8 @@ if (!doNotTrack) {
 <h3 id="scores">Scores</h3>
 <p>Next, I looked at the confidence scores of the skills. I did not look too much at the range of the confidence scores, but they appear to be distributed between 0 and 20, with extreme values for low/high confidence options.</p>
 <p>I would expect that the distribution for scores to be closer to that predicted by the Zipf&rsquo;s law distribution. Intuitively, there are only so many relevant skills one can put for a particular job description, which is unlikely to number more than a two digit number. However, most of the job descriptions in this data set contains about 20 listed skills, so there will be a large number of skills listed that have low relevance values, but made it into the top 20 for a job description by virtue of the quota. Hence, the relative weights as indicated by the confidence scores should compensate for this effect.</p>
-<figure>
-    <img src="/zipf-law-distribution-skills/zipf_law_score.png"
-         alt="True score of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/> <figcaption>
+<figure><img src="/zipf-law-distribution-skills/zipf_law_score.png"
+         alt="True score of skills and predicted count of skills (based on reciprocal rank) against rank order of skill."/><figcaption>
             <p>True score of skills and predicted count of skills (based on reciprocal rank) against rank order of skill.</p>
         </figcaption>
 </figure>

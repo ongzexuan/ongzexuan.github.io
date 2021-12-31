@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -133,9 +133,8 @@ if (!doNotTrack) {
 <p>I could write a script to do that&hellip; or I could pay <a href="https://metadatafixer.com/">this dude</a> $15 to deal with it. Guess which one I picked!</p>
 <h2 id="nextcloud">NextCloud</h2>
 <p>I decided I was going to run a NextCloud instance. It&rsquo;s free to self-host, simple to deploy, and has client apps on the phone and desktop for all my syncing needs. There&rsquo;s also a container already built for Unraid. The following image is the end result.</p>
-<figure>
-    <img src="/nextcloud-unraid/main-interface.png"
-         alt="My NextCloud, it works!"/> <figcaption>
+<figure><img src="/nextcloud-unraid/main-interface.png"
+         alt="My NextCloud, it works!"/><figcaption>
             <p>My NextCloud, it works!</p>
         </figcaption>
 </figure>
@@ -145,9 +144,8 @@ if (!doNotTrack) {
 <p>For NextCloud specifically, I want to access my cloud from the clearnet at <code>nextcloud.mydomain.com</code>. To do that redirection we need a reverse proxy. SpaceInvaderOne also has a <a href="https://youtu.be/I0lhZc25Sro">tutorial</a> for setting all these up, including NextCloud and Sonarr. I didn&rsquo;t go this route because it involves having your containers on a custom Docker network, which requires a docker restart, which will probably kick me off the network since OpenVPN runs out of a Docker container. I&rsquo;m not co-located with my server right now, so if I blow it up I&rsquo;d need to drive 4 hours to fix it. I&rsquo;m not convinced I&rsquo;ll be able to regain remote access after restarting Docker (there isn&rsquo;t actually a restart option, it&rsquo;s more of stop and then start), so I figure I&rsquo;ll just wrangle the reverse proxy bit myself.</p>
 <p>When it comes to reverse proxies people think of Nginx, so I installed <a href="https://github.com/jlesage/docker-nginx-proxy-manager/">NginxProxyManager</a> container on Unraid, which is a UI wrapper around Nginx (because I always screw up the config). The only part to take note of here is to set the HTTP and HTTPS port for the container. This is because Unraid itself binds to the traditional port 80 and port 443, so you&rsquo;d need to use something else. I had these bound to the same ports as LetsEncrypt from the SpaceInvaderOne setup.</p>
 <p>NginxProxyManager should install and start in a jiffy. Once on the dashboard we can add an entry pointing to NextCloud. NextCloud runs on HTTPS. We&rsquo;ll just specify the local address and port number and we&rsquo;re done.</p>
-<figure>
-    <img src="/nextcloud-unraid/nginxproxymanager.png"
-         alt="NginxProxyManager interface with two destinations."/> <figcaption>
+<figure><img src="/nextcloud-unraid/nginxproxymanager.png"
+         alt="NginxProxyManager interface with two destinations."/><figcaption>
             <p>NginxProxyManager interface with two destinations.</p>
         </figcaption>
 </figure>
@@ -249,7 +247,54 @@ if (!doNotTrack) {
 </article>
     
 
-            
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/mathqa/">
+                <img class="post-card-image"src="/mathqa/feature.png" alt="Math Question Answering"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/mathqa/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">dev</div>
+                    
+
+                    <h2 class="post-card-title">Math Question Answering</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>Describing my interest in MathQA, and collecting good papers and resources in a single place.</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2021-610-10">21 October 2021</time>
+                            <span class="bull">&bull;</span> 9 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
         </div>
     </div>
 </aside>

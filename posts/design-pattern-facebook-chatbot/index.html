@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -151,9 +151,8 @@ if (!doNotTrack) {
 <p>I&rsquo;d like to get there eventually, but unfortunately I think that is a difficult stage to reach now. In particular, a big issue is that it&rsquo;s pretty difficult for states to be completely decided beforehand. Perhaps after constructing the conversation, it becomes apparent that some sections are too lengthy, or a more timely transition message is warranted between questions. No conversation designer would commit in advance to X number of dialog bubbles. That&rsquo;s great for implementation, but no real natural conversation takes placed with a pre-defined number of exchanges.</p>
 <h3 id="blocks-flows-and-objectives">Blocks, Flows and Objectives</h3>
 <p>Assuming that you&rsquo;re building a task-oriented bot, as most people are, there generally is a predefined list of &lsquo;use cases&rsquo; for the bot, just like in a use case diagram (seriously?)</p>
-<figure>
-    <img src="/design-pattern-facebook-chatbot/usecase.png"
-         alt="(Image credit: Lucid Charts)"/> <figcaption>
+<figure><img src="/design-pattern-facebook-chatbot/usecase.png"
+         alt="(Image credit: Lucid Charts)"/><figcaption>
             <p>(Image credit: Lucid Charts)</p>
         </figcaption>
 </figure>
@@ -197,7 +196,7 @@ if (!doNotTrack) {
 <p>I&rsquo;m of the belief that a user should always have some way of exiting the current context. For mobile apps, if something goes horribly wrong, or the app just refuses to respond, one can always close the app on the task bar and restart it. Otherwise, there is always a &lsquo;back&rsquo; button to return to the previous state. For bots, it is not immediately obvious what the course of action should be, particularly in cases where the bot not respond, responds inappropriately, or just doesn&rsquo;t provide the correct options for a user to respond to. There is also no native &lsquo;back&rsquo; functionality provided, simply because there is no &lsquo;going back&rsquo; in a conversation. Hence, it is necessary to provide a means to &lsquo;restart&rsquo; the conversation or &lsquo;reboot&rsquo; the bot.</p>
 <p>The first solution to this problem is to add a bunch of menu options in the persistent menu provided by Messenger. If you bot is a task-driven bot as opposed to an entertaining but objectiveless chatterbot, this would also make functional sense as it offers users a way to kick start certain processes to achieve some end.</p>
 <p>The second solution is to send all input through a pattern matching process or NLP engine and identify if the user&rsquo;s intent is to get help, to return to the previous state, or to simply end the conversation. This means that these intents must be prioritized over the current conversation context. An obvious but common example would be:</p>
-<pre><code>Bot: Can I get your name please?
+<pre tabindex="0"><code>Bot: Can I get your name please?
 User: Bobb
 Bot: Ok Bobb, can I get your current age?
 User: Hold on I spelt that wrong, I mean Bob
@@ -241,13 +240,13 @@ User: ...
 <p>This view also means that, if your chatbot does not simplify the information retrieval process, and your goal isn&rsquo;t to entertain people with meaningless conversation, then you need to relook at your dialog flows or end objective of the conversations that you are constructing. There are a number of articles already written on related topics.</p>
 <h3 id="a-task-oriented-chatterbot">A task-oriented chatterbot?</h3>
 <p>I&rsquo;m interested in trying to figure out if it is possible to meld the task-driven bots with chatterbots to create a less machinated question answering system. This is because most (Facebook) pages probably need some sort of FAQ system. Beyond a certain size of FAQ, it becomes less viable to have a laundry list of items. Instead, a search or chat solution might make more sense. Currently approaches to chat however, treat the chatbot as nothing more than another search box, which I feel greatly underutilizes the potential of the chat medium. Consider</p>
-<pre><code>User: Is the cafe busy around 2pm today?
+<pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
 Bot: Here's a chart (link) of our busy times (sourced from Google)
 </code></pre><p>Or slightly better</p>
-<pre><code>User: Is the cafe busy around 2pm today?
+<pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
 Bot: We are busiest at 1pm on weekdays!
 </code></pre><p>The most reasonable response can usually be elucidated from putting yourself in the shoes of your most conscientious customer service representative.</p>
-<pre><code>User: Is the cafe busy around 2pm today?
+<pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
 Bot: We're usually quite busy around that time on Wednesdays.
 Bot: If you could come earlier around 1pm, we're a bit less busy then!
 </code></pre><p>Where the task driven side of the bot reflects the use cases and pieces of information a user could possible derive from the service, the chatterbot side would represent a culture and personality. I think that some combination of a ChatScript engine with the Botkit framework might suffice for this role, though that would demand more from the dialog designer.</p>

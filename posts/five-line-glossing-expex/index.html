@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -134,7 +134,7 @@ if (!doNotTrack) {
 <p>I started with <code>gb4e</code> and <code>cgloss4e</code>. The issue here is that <code>gb4e</code> is limited to only 3 line glosses, including the header, and my class needs a 5 line gloss.
 There did not appear to be a straightforward workaround to the problem.</p>
 <p>Instead I switched to <code>expex</code>. <code>expex</code> provides approximately 3 gloss line classes, but they can be re-used to give more lines if necessary. For instance:</p>
-<pre><code>\ex
+<pre tabindex="0"><code>\ex
     \begingl
     \gla dʊro pa jʊma je jʊkmʊha {}//
     \glb dʊro pa jʊma je jʊk- mʊha//
@@ -144,9 +144,8 @@ There did not appear to be a straightforward workaround to the problem.</p>
     \endgl
 \xe
 </code></pre><p>This gives a rather nice five line gloss:</p>
-<figure>
-    <img src="/five-line-glossing-expex/fiveline.png"
-         alt="A nice five-line gloss! Gosh, why did we need five lines."/> <figcaption>
+<figure><img src="/five-line-glossing-expex/fiveline.png"
+         alt="A nice five-line gloss! Gosh, why did we need five lines."/><figcaption>
             <p>A nice five-line gloss! Gosh, why did we need five lines.</p>
         </figcaption>
 </figure>
@@ -156,7 +155,7 @@ There did not appear to be a straightforward workaround to the problem.</p>
 Note2: The <code>\ex</code> environment aligns words vertically using whitespaces. Empty &lsquo;word&rsquo; spaces need to be highlighted using <code>{}</code>, which I guess is reasonable.</p>
 <h2 id="fonts">Fonts</h2>
 <p>I&rsquo;m rendering my work on ShareLatex. To use Unicode symbols, we have to compile using XeLaTex instead of the default LaTex. Then, a Unicode supporting font needs to be used as well. In this case, I&rsquo;m using <a href="https://software.sil.org/charis/">Charis SIL</a>. To get the fonts to work, upload the downloaded fonts to the project directory, and make some adjustments to the settings in the header of the document:</p>
-<pre><code>\usepackage{expex}
+<pre tabindex="0"><code>\usepackage{expex}
 \usepackage{fontspec}
 \setmainfont[
     BoldFont={CharisSIL-B.ttf},

@@ -7,10 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
-    <lastBuildDate>Mon, 15 Feb 2021 00:49:17 -0400</lastBuildDate>
-    
-	<atom:link href="ongzexuan.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 21 Oct 2021 18:00:00 +0000</lastBuildDate><atom:link href="ongzexuan.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Math Question Answering</title>
+      <link>ongzexuan.github.io/posts/mathqa/</link>
+      <pubDate>Thu, 21 Oct 2021 18:00:00 +0000</pubDate>
+      
+      <guid>ongzexuan.github.io/posts/mathqa/</guid>
+      <description>Describing my interest in MathQA, and collecting good papers and resources in a single place.</description>
+    </item>
     
     <item>
       <title>Setting up Nextcloud on Unraid</title>

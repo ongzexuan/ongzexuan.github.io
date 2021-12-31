@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -123,9 +123,8 @@ if (!doNotTrack) {
                     <p>The homeworks are not forthcoming at the moment so I&rsquo;ve taken the night off to write a Piazza Slackbot. You can find it <a href="https://github.com/ongzexuan/piazza_slackbot">here</a>, feel free to fork it for your use.</p>
 <h2 id="motivation">Motivation</h2>
 <p>Our TA team for the Natural Language Processing course has a new brand new Slack channel. It would be great if we could collect all the relevant course information in one place so we wouldn&rsquo;t have to check so many places for notifications. This would include Github commit notifications (for the main course repo) and notifications for new Piazza posts. Ideally, we would also at some point have a monitoring bot for Gradescope and Autolab to provide daily logs of submission numbers, scores and job times, but let&rsquo;s start with the Piazza posts.</p>
-<figure>
-    <img src="/unofficial-piazza-integration-slack/poc.png"
-         alt="Proof of concept!"/> <figcaption>
+<figure><img src="/unofficial-piazza-integration-slack/poc.png"
+         alt="Proof of concept!"/><figcaption>
             <p>Proof of concept!</p>
         </figcaption>
 </figure>
@@ -139,7 +138,7 @@ if (!doNotTrack) {
 <p>Another method is to keep a record of posts already forwarded to Slack so we don&rsquo;t end up forwarding it again. This could take the form of an environment variable which keeps track of the post id of the last forwarded post. This method however would require conscientious attention in updating the environment variable per deployment.</p>
 <p>Instead, a nice workaround of sorts is to make use of the feed feature, an endpoint which is called when the Piazza page is loaded. The feed provides information to populate the standard Piazza page. Instead of providing the full post information, it instead provides a short snippet of each post.</p>
 <p>The feed is orderd in a priority queue sort of way. Pinned posts are at the top, and then the remaining posts follow a chronological order. It happens that the post numbers increase linearly, so as long as we can get past the pinned posts, the first non-pinned post will be the latest post. We can distinguish a pinned post from a non-pinned post by the presence of the <code>pinned</code> key in the dictionary that represents the post in the feed (Ideally we would use the value but it seems to be designed this way currently). With this, we can write a function that returns us the latest post id.</p>
-<pre><code>def get_max_id(feed):
+<pre tabindex="0"><code>def get_max_id(feed):
     for post in feed:
         if &quot;pin&quot; not in post:
             return post[&quot;nr&quot;]
@@ -155,7 +154,7 @@ if (!doNotTrack) {
 <h2 id="deployment">Deployment</h2>
 <p>I deployed this bot on a free-tier Heroku instance. Was rather quick and hassle free.</p>
 <p>For Heroku deployment some additional configuration files are needed. Specifcally the Procfile:</p>
-<pre><code>worker: python piazza_bot.py
+<pre tabindex="0"><code>worker: python piazza_bot.py
 </code></pre><p>Indicating the process type as <code>worker</code> instead of the more common <code>web</code> lets Heroku know that this app will not be binding to the HTTP port. This prevents Heroku from terminating the app prematurely.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>I&rsquo;m just happy it still runs in the morning. In future I&rsquo;d make it a more full-fledged bot where you can at least poll it for its health too.</p>

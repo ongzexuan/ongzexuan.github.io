@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -128,9 +128,8 @@ if (!doNotTrack) {
                     <p>To keep costs down, convoluted plans are probably sometimes necessary.</p>
 <h3 id="context">Context</h3>
 <p>I built an ETL pipeline that takes Internet data from ScrapingHub, does cool stuff to the data and puts it in Metabase. After all that last month, I had a brief look at my AWS bill. I figured the bill couldn&rsquo;t be that bad, even though this last month I spun up my first t2.medium instance to keep Metabase running at a reasonable speed, which is in a funny way quite a financial milestone for me.</p>
-<figure>
-    <img src="/etl-on-the-cheap-with-aws/bill_chart.png"
-         alt="The bill chart seems to correspond with the development efforts. You can also see the day where I switched from a t2.small to a t2.medium."/> <figcaption>
+<figure><img src="/etl-on-the-cheap-with-aws/bill_chart.png"
+         alt="The bill chart seems to correspond with the development efforts. You can also see the day where I switched from a t2.small to a t2.medium."/><figcaption>
             <p>The bill chart seems to correspond with the development efforts. You can also see the day where I switched from a t2.small to a t2.medium.</p>
         </figcaption>
 </figure>
@@ -187,21 +186,20 @@ if (!doNotTrack) {
 <li>When said RDS instance changes its state from &lsquo;stopped&rsquo; to &lsquo;available&rsquo;, call the Lambda in the VPC that loads the staging data from the staging S3 bucket into the database in the RDS instance</li>
 <li>When loading for all staging data is complete, call the Lambda that called Boto to turn off the RDS instance</li>
 </ol>
-<figure>
-    <img src="/etl-on-the-cheap-with-aws/rds.png"
-         alt="Three CloudWatch rules for chaining the things together. Also yes I cheated I&amp;rsquo;m just turning off the RDS at a scheduled time. BUT BUT I can justify this by claiming that I do need a cap on the uptime of the RDS, in the rare event that the loading step fails to take place i.e. I should not wait indefinitely for loading to take place, it could have failed silently :)"/> <figcaption>
+<figure><img src="/etl-on-the-cheap-with-aws/rds.png"
+         alt="Three CloudWatch rules for chaining the things together. Also yes I cheated I&amp;rsquo;m just turning off the RDS at a scheduled time. BUT BUT I can justify this by claiming that I do need a cap on the uptime of the RDS, in the rare event that the loading step fails to take place i.e. I should not wait indefinitely for loading to take place, it could have failed silently :)"/><figcaption>
             <p>Three CloudWatch rules for chaining the things together. Also yes I cheated I&rsquo;m just turning off the RDS at a scheduled time. BUT BUT I can justify this by claiming that I do need a cap on the uptime of the RDS, in the rare event that the loading step fails to take place i.e. I should not wait indefinitely for loading to take place, it could have failed silently :)</p>
         </figcaption>
 </figure>
 
 <h4 id="daily-schedule">Daily Schedule</h4>
 <p>Scheduling a CloudWatch trigger to run daily can be done relatively easily following the syntax and examples provided <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">here</a>. For example to schedule the RDS to start at UTC time 10am daily (1), I have the following expression. A similar expression can be made to stop the RDS at scheduled times (3).</p>
-<pre><code>0 10 * * ? *
+<pre tabindex="0"><code>0 10 * * ? *
 </code></pre><p>AWS seems to run only on UTC time. This is fine so long as it syncs with ScrapingHub, which also runs on UTC time. The date matters because it is used to distinguish new data from old data, so it would be extremely problematic if ScrapingHub provided data in the wrong date to our downstream processes.</p>
 <p>You can check that everything is connected by going to the Lambda console. The relevant Lambdas should now have a CloudWatch trigger attached to them where there was previously none.</p>
 <h4 id="triggers">Triggers</h4>
 <p>Constructing the trigger when the RDS becomes available (2) is slightly more difficult. There is a built-in drop-down menu for EC2 services, where you can construct a trigger that activates when the state of the EC2 instance changes to a desired state. However, the menu for the Relational Database Service doesn&rsquo;t seem to provide a similar option. We can instead construct a custom event pattern as follows:</p>
-<pre><code>{
+<pre tabindex="0"><code>{
   &quot;detail-type&quot;: [
     &quot;RDS DB Instance Event&quot;
   ],
@@ -224,7 +222,7 @@ if (!doNotTrack) {
   }
 }
 </code></pre><p>There isn&rsquo;t too much documentation on how to construct such an event pattern for RDS. I came to this by aggregating information from various sources, including manually turning on and off the RDS and checking the log to see the event notifications. You can do the same using the following command on the AWS CLI, which will fetch information about the last seven days of notifications.</p>
-<pre><code>$ aws rds describe-events --duration 10080
+<pre tabindex="0"><code>$ aws rds describe-events --duration 10080
 </code></pre><h3 id="checking-it-all-works">Checking it all Works</h3>
 <p>The final flow of data is now as follows:</p>
 <ol>
@@ -241,17 +239,15 @@ if (!doNotTrack) {
 <li>Actually turning on the RDS showed fresh data in the database</li>
 <li>Billing cost decreased</li>
 </ol>
-<figure>
-    <img src="/etl-on-the-cheap-with-aws/bill_chart_weekend.png"
-         alt="Cost decreased! Look!"/> <figcaption>
+<figure><img src="/etl-on-the-cheap-with-aws/bill_chart_weekend.png"
+         alt="Cost decreased! Look!"/><figcaption>
             <p>Cost decreased! Look!</p>
         </figcaption>
 </figure>
 
 <p>The labelling of the graphs doesn&rsquo;t give a very good picture of the actual usage. So here&rsquo;s another graph I took a day later labelled by database engines. The RDS instance runs a MySQL engine. We can visibly see the usage of the MySQL instance becoming insignificant over time, which is exactly what we want.</p>
-<figure>
-    <img src="/etl-on-the-cheap-with-aws/bill_chart_weekend.png"
-         alt="Cost decreased! Look!"/> <figcaption>
+<figure><img src="/etl-on-the-cheap-with-aws/bill_chart_weekend.png"
+         alt="Cost decreased! Look!"/><figcaption>
             <p>Cost decreased! Look!</p>
         </figcaption>
 </figure>

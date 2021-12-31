@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -130,9 +130,8 @@ if (!doNotTrack) {
 <p>The <a href="https://github.com/Microsoft/malmo">GitHub page for Malmo</a> provides some guidance and some challenges to solve. Here&rsquo;s an interesting one for beginners like myself:</p>
 <h2 id="solving-a-discrete-maze">Solving a discrete maze</h2>
 <p><code>tutorial_6.py</code> in the provided examples generates a simple maze of lava blocks and well, non-lava blocks. The goal is for the player to navigate himself to the lapis block (nice looking shiny blue block for the benefit of those who don&rsquo;t Minecraft) without, of course, falling into the lava. Here&rsquo;s a GIF of an unsuccessful attempt:</p>
-<figure>
-    <img src="/malmo-maze-solver/moving_small.gif"
-         alt="Bot repeatedly falling into the lava."/> <figcaption>
+<figure><img src="/malmo-maze-solver/moving_small.gif"
+         alt="Bot repeatedly falling into the lava."/><figcaption>
             <p>Bot repeatedly falling into the lava.</p>
         </figcaption>
 </figure>
@@ -143,9 +142,8 @@ if (!doNotTrack) {
 <h2 id="bot-behaviour">Bot behaviour</h2>
 <p>Since this is a discrete 2D maze, at each game tick the bot has four possible moves to make: north, south, east or west. Specifically, it can move in the y or x axis with a value of +1 or -1. For each square on the maze (i.e. each game state), there is an associated reward value for each of the four possible moves, which defaults to 0. To move the bot, the algorithm takes the moves with the maximum associated reward value, and picks a random one. Since at the start of the game most internal moves have a value of 0 attached to them by default, the bot appears to move rather randomly (because it actually is). Each move also adds -1 to the current reward state, as a form of penalty for taking longer than necessary paths to the goal.</p>
 <p>As the bot moves, the provided QTable is updated with reward of making a particular action given a game state (tile you are currently on). Here&rsquo;s an example:</p>
-<figure>
-    <img src="/malmo-maze-solver/qtable.gif"
-         alt="Q table of the transition probabilities."/> <figcaption>
+<figure><img src="/malmo-maze-solver/qtable.gif"
+         alt="Q table of the transition probabilities."/><figcaption>
             <p>Q table of the transition probabilities.</p>
         </figcaption>
 </figure>
@@ -189,17 +187,15 @@ if (!doNotTrack) {
 </code></pre>
 <h2 id="results">Results</h2>
 <p>Here&rsquo;s some GIFs of the run after dying approximately 50 times.</p>
-<figure>
-    <img src="/malmo-maze-solver/moving_small_success.gif"
-         alt="A successful bot run."/> <figcaption>
+<figure><img src="/malmo-maze-solver/moving_small_success.gif"
+         alt="A successful bot run."/><figcaption>
             <p>A successful bot run.</p>
         </figcaption>
 </figure>
 
 <p>Here is a corresponding successful run displayed on the QTable.</p>
-<figure>
-    <img src="/malmo-maze-solver/qtable_success.gif"
-         alt="A much better Q table of the transition probabilities."/> <figcaption>
+<figure><img src="/malmo-maze-solver/qtable_success.gif"
+         alt="A much better Q table of the transition probabilities."/><figcaption>
             <p>A much better Q table of the transition probabilities.</p>
         </figcaption>
 </figure>

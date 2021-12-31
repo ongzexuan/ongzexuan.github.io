@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -120,12 +120,12 @@ if (!doNotTrack) {
 <p>There were a number of things that didn&rsquo;t work out of the box and were not particularly well documented.</p>
 <h4 id="images">Images</h4>
 <p>Adding images can be done using a shortcode as follows (compress the handlebars):</p>
-<pre><code>{ { &lt; figure src=&quot;/malmo-maze-solver/moving_small.gif&quot; caption=&quot;Bot repeatedly falling into the lava.&quot; &gt; } }
+<pre tabindex="0"><code>{ { &lt; figure src=&quot;/malmo-maze-solver/moving_small.gif&quot; caption=&quot;Bot repeatedly falling into the lava.&quot; &gt; } }
 </code></pre><h4 id="github-gists">Github Gists</h4>
 <p>Adding gists is a bit more complicated. First add a shortcode under <code>layouts &gt; shortcodes &gt; gist.html</code>. In that file specify the JS.</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://gist.github.com/{{ .Get 0 }}.js&quot;&gt;&lt;/script&gt;
+<pre tabindex="0"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://gist.github.com/{{ .Get 0 }}.js&quot;&gt;&lt;/script&gt;
 </code></pre><p>Then you can add gists using the shortcode with a gist id:</p>
-<pre><code>{ {&lt;gist 07415be703d5576f9433ddb0730f7766&gt;} }
+<pre tabindex="0"><code>{ {&lt;gist 07415be703d5576f9433ddb0730f7766&gt;} }
 </code></pre><p>The gist CSS layout does not play well with dark mode. It looks really ugly. I overwrote that with some custom CSS I borrowed from a source I lost, which I put under the <code>static</code> folder and import in my site header:</p>
 <script type="text/javascript" src="http://gist.github.com/c77799e2f1f54569c034a9ceeca85e3e.js"></script>
 <h4 id="front-matter">Front Matter</h4>
@@ -142,16 +142,14 @@ if (!doNotTrack) {
 <p>Some features were not provided out of the box so I hardcoded some items into the theme itself. This includes adding a favicon to the page, changing the site title to a static one instead of a dynamically generated one per post, and adding icons for post authors. If you&rsquo;d like to know how I fixed something, you can take a look directly at the <a href="https://github.com/ongzexuan/blog">source code of the blog</a> and do a diff, or just ask me.</p>
 <h4 id="before-and-after">Before and After</h4>
 <p>There are a number of small but nice changes to the layout which I am quite pleased with.</p>
-<figure>
-    <img src="/migrating-to-hugo/old.png"
-         alt="Old layout, with obnoxiously sized title, a non-recognizable image icon, and a date that&amp;rsquo;s kind of in a strange place, with the summary enlarged for some reason."/> <figcaption>
+<figure><img src="/migrating-to-hugo/old.png"
+         alt="Old layout, with obnoxiously sized title, a non-recognizable image icon, and a date that&amp;rsquo;s kind of in a strange place, with the summary enlarged for some reason."/><figcaption>
             <p>Old layout, with obnoxiously sized title, a non-recognizable image icon, and a date that&rsquo;s kind of in a strange place, with the summary enlarged for some reason.</p>
         </figcaption>
 </figure>
 
-<figure>
-    <img src="/migrating-to-hugo/new.png"
-         alt="New layout, with obnoxiously sized title, text in the nav bar, nice looking date with an author icon, and no enlarged summary."/> <figcaption>
+<figure><img src="/migrating-to-hugo/new.png"
+         alt="New layout, with obnoxiously sized title, text in the nav bar, nice looking date with an author icon, and no enlarged summary."/><figcaption>
             <p>New layout, with obnoxiously sized title, text in the nav bar, nice looking date with an author icon, and no enlarged summary.</p>
         </figcaption>
 </figure>

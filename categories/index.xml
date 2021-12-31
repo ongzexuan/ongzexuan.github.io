@@ -6,10 +6,6 @@
     <description>Recent content in Categories on zexuannotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Copyright © 2018–2020, zexuannotes</copyright>
-    
-	<atom:link href="ongzexuan.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Copyright © 2018–2020, zexuannotes</copyright><atom:link href="ongzexuan.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

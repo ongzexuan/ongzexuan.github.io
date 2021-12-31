@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -148,9 +148,8 @@ if (!doNotTrack) {
 </ol>
 <h3 id="data-flow">Data Flow</h3>
 <p>For our purposes, the telemetry data will flow in the following design.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/dataflow.png"
-         alt="Simple infrastructure for exporting metrics eventually to Grafana. The milk jugs represent Docker containers, for the lack of a better icon. All roads lead to Grafana."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/dataflow.png"
+         alt="Simple infrastructure for exporting metrics eventually to Grafana. The milk jugs represent Docker containers, for the lack of a better icon. All roads lead to Grafana."/><figcaption>
             <p>Simple infrastructure for exporting metrics eventually to Grafana. The milk jugs represent Docker containers, for the lack of a better icon. All roads lead to Grafana.</p>
         </figcaption>
 </figure>
@@ -158,14 +157,14 @@ if (!doNotTrack) {
 <p>Basically, for each &lsquo;thing&rsquo; we&rsquo;d like to collect data from, we expose a HTTP port. For the databases, since the databases by themselves can&rsquo;t really do that, we use the <a href="https://github.com/wrouesnel/postgres_exporter">Postgres Exporter</a> service some kind soul already created to do that for us. It&rsquo;s nicely packaged as a docker container, so all we have to do is specify the connection to the database and the port we intend to expose it on.</p>
 <h3 id="postgres-exporter">Postgres Exporter</h3>
 <p>To run the Postgres Exporter service, create an environment file with the following variables. The latter two variables are optional, it allows to specify which port and endpoint you&rsquo;d like to expose.</p>
-<pre><code>DATA_SOURCE_NAME=postgresql://&lt;USER&gt;:&lt;PASSWORD&gt;@&lt;HOST&gt;:&lt;PORT&gt;/&lt;DATABASE&gt;?sslmode=disable
+<pre tabindex="0"><code>DATA_SOURCE_NAME=postgresql://&lt;USER&gt;:&lt;PASSWORD&gt;@&lt;HOST&gt;:&lt;PORT&gt;/&lt;DATABASE&gt;?sslmode=disable
 PG_EXPORTER_WEB_LISTEN_ADDRESS=:9188
 PG_EXPORTER_WEB_TELEMETRY_PATH=/metrics
 </code></pre><p>Then, <code>docker run</code> and you&rsquo;re done!</p>
-<pre><code>sudo docker run -d --name rds_exporter --net=host --env-file &lt;MY_ENV_FILE&gt; wrouesnel/postgres_exporter 
+<pre tabindex="0"><code>sudo docker run -d --name rds_exporter --net=host --env-file &lt;MY_ENV_FILE&gt; wrouesnel/postgres_exporter 
 </code></pre><h3 id="exporting-python-service-data">Exporting Python service data</h3>
 <p>For anything other than a database, Prometheus itself provides clients that perform the exposing of data on an endpoint. We added the Python client to our ingestion service to collect metrics about the number of new movies added, number of new users added, and the processing time for certain costly functions. We briefly describe some of them here. For example, we collect processing time metrics in the following manner:</p>
-<pre><code>import time
+<pre tabindex="0"><code>import time
 from prometheus_client import start_http_server, Summary
 
 # Instantiate Summary object for collecting data
@@ -185,7 +184,7 @@ def our_function():
 </code></pre><h3 id="setting-up-prometheus">Setting up Prometheus</h3>
 <p>Prometheus runs in a nice Docker container. To figure out where to ingest data from, it takes in a YAML file <code>prometheus.yml</code>. For better management, we store <code>prometheus.yml</code> at <code>/var/lib/prometheus</code>, and map this directory to a container directory in the container so that we can change the configuration on our host.</p>
 <p>Our <code>prometheus.yml</code> file looks as follows. It defines three jobs, and for each job a scraping interval and an endpoint to scrape from.</p>
-<pre><code>global:
+<pre tabindex="0"><code>global:
   scrape_interval:     15s # By default, scrape targets every 15 seconds.
 
   # Attach these labels to any time series or alerts when communicating with
@@ -213,30 +212,27 @@ scrape_configs:
     static_configs:
       - targets: ['&lt;IP&gt;:&lt;PORT&gt;']
 </code></pre><p>Again, to start the Prometheus service we run the Docker container:</p>
-<pre><code>sudo docker run -d --name prometheus -p 9090:9090 -v /var/lib/prometheus:/etc/prometheus --expose 9090 prom/prometheus
+<pre tabindex="0"><code>sudo docker run -d --name prometheus -p 9090:9090 -v /var/lib/prometheus:/etc/prometheus --expose 9090 prom/prometheus
 </code></pre><p>Now, we simply visit port 9090 on the machine to see the Prometheus interface.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/prometheus.png"
-         alt="Prometheus main interface."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/prometheus.png"
+         alt="Prometheus main interface."/><figcaption>
             <p>Prometheus main interface.</p>
         </figcaption>
 </figure>
 
 <p>More importantly, navigate to the Status &gt; Targets tab, to verify that the metrics endpoints that you are consuming are available. You should see something similar the the following.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/prometheus_targets.png"
-         alt="Status of metric collection targets. IP addresses obscured in a bespoke manner."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/prometheus_targets.png"
+         alt="Status of metric collection targets. IP addresses obscured in a bespoke manner."/><figcaption>
             <p>Status of metric collection targets. IP addresses obscured in a bespoke manner.</p>
         </figcaption>
 </figure>
 
 <h3 id="finally-grafana">Finally Grafana</h3>
 <p>Now, we get finally get to run Grafana. To persist the settings and dashboards, we map the <code>grafana</code> directory of the container to a local directory.</p>
-<pre><code>sudo docker run -d -p 3000:3000 --name=grafana -v &quot;/var/lib/grafana:/home/grafana/&quot; grafana/grafana
+<pre tabindex="0"><code>sudo docker run -d -p 3000:3000 --name=grafana -v &quot;/var/lib/grafana:/home/grafana/&quot; grafana/grafana
 </code></pre><p>Again, navigating to port 3000 should bring up the main Grafana interface.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/grafana.png"
-         alt="Grafana main interface with some minor advertising."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/grafana.png"
+         alt="Grafana main interface with some minor advertising."/><figcaption>
             <p>Grafana main interface with some minor advertising.</p>
         </figcaption>
 </figure>
@@ -245,25 +241,22 @@ scrape_configs:
 <p>To visualize data from any particular source, we have to first define a Data Source in Grafana. In this case, we can navigate to the Data Source tab and add a Prometheus data source. Simply add the details for connecting to the Prometheus service (we exposed the 9090 endpoint for Prometheus earlier).</p>
 <p>Once we&rsquo;ve added the data source, we can now go ahead and create a Dashboard for our ingestion service. Dashboards here work the same way as they do on most similar software (e.g. Tableau, Metabase). We can also import dashboards designed by others, but let&rsquo;s make our own first.</p>
 <p>In our newly created Dashboard, click anywhere to add a new Panel. In this Panel, we select our Prometheus Data Source, and enter a Prometheus query. In this example, we want to visualize the latency of our main Kafka record processing loop. For a more representative result, we take the 1 hour running average for latency, and get the graph below.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/latency.png"
-         alt="Creation of a new panel for running average latency of a target function. I left it running before sleeping, so here&amp;rsquo;s 12 hours of data."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/latency.png"
+         alt="Creation of a new panel for running average latency of a target function. I left it running before sleeping, so here&amp;rsquo;s 12 hours of data."/><figcaption>
             <p>Creation of a new panel for running average latency of a target function. I left it running before sleeping, so here&rsquo;s 12 hours of data.</p>
         </figcaption>
 </figure>
 
 <p>You can actually also obtain this same graph in the Prometheus interface directly. If we enter the same query in Prometheus, we get a pretty much identical graph, barring differences and axes and timezones.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/latency_prometheus.png"
-         alt="Same graph from the same query but in the Prometheus interface."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/latency_prometheus.png"
+         alt="Same graph from the same query but in the Prometheus interface."/><figcaption>
             <p>Same graph from the same query but in the Prometheus interface.</p>
         </figcaption>
 </figure>
 
 <p>We go ahead and add two more Panels for our ingestion service dashboard, so now we can a fairly satisfying dashboard that looks like we&rsquo;ve done a lot of work.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/ingestion_dashboard.png"
-         alt="Lots of work."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/ingestion_dashboard.png"
+         alt="Lots of work."/><figcaption>
             <p>Lots of work.</p>
         </figcaption>
 </figure>
@@ -271,17 +264,15 @@ scrape_configs:
 <p>I&rsquo;ve added two other panels to visualize how many new movies and users we&rsquo;ve added to our database from the Kafka stream since the ingestion service was started. It seems that we haven&rsquo;t really added many new movies over the last 12 hours, but new users are trickling in at a relatively uniform rate.</p>
 <h3 id="importing-dashboards">Importing Dashboards</h3>
 <p>One cool community feature of Grafana is that Dashboards are shareable. This is very useful since more often than not, we would like to track metrics similar to what everyone else is tracking - service loads, database connections, memory consumption etc. Making a dashboard from scratch also takes a bit of effort, so why not look around to see if someone has already made one? Here we demonstrate importing a dashboard made by someone else for visualizing telemetry data from our PostgreSQL databases. We&rsquo;ll use the &lsquo;Postgres Overview&rsquo; Dashboard, which contains most of what we need. Go to Import Dashboard, and enter the ID of the Dashboard, and fill in the rest of the details.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/dashboard_import.png"
-         alt="Importing a dashboard."/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/dashboard_import.png"
+         alt="Importing a dashboard."/><figcaption>
             <p>Importing a dashboard.</p>
         </figcaption>
 </figure>
 
 <p>This should give us a relatively reasonable dashboard as follows.</p>
-<figure>
-    <img src="/prometheus-grafana-seai/postgres_overview.png"
-         alt="Statistics about my Postgres instance(s)! Now I just have to figure out which ones I actually need&amp;hellip;"/> <figcaption>
+<figure><img src="/prometheus-grafana-seai/postgres_overview.png"
+         alt="Statistics about my Postgres instance(s)! Now I just have to figure out which ones I actually need&amp;hellip;"/><figcaption>
             <p>Statistics about my Postgres instance(s)! Now I just have to figure out which ones I actually need&hellip;</p>
         </figcaption>
 </figure>

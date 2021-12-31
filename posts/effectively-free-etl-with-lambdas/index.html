@@ -14,7 +14,7 @@
 
     
 
-    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.9ca31b56b7beea5a7df404ca6d08aca283c61ce98c5313c97bb56cfe80066320.css" />
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
     <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
 
     
@@ -124,9 +124,8 @@ if (!doNotTrack) {
 <p>I&rsquo;ve some experience building Airflow DAGs but not much in building the entire pipeline, so this is all new to me. I figure a good lightweight and financially affordable option would be to use AWS Lambdas. I can deploy a bunch of spiders in the cloud (picture that), have them harvest data on a timely basis and export the raw data to an S3 bucket, and let the Lambdas do the rest.</p>
 <h3 id="architecture">Architecture</h3>
 <p>The architecture of the project looks something like the following. In the extract step, we deploy a bunch of automated spiders on ScrapingHub to crawl and export data on a timely basis to an S3 bucket. In the transform step, we use a Lambda function that is triggered when new data enters the S3 bucket to process the raw data into a form that is usable for downstream analysis. Finally, in the load step, we load the data into a MySQL database, in this case an AWS RDS server. My data size and personal budget do not currently allow for anything fancier than that.</p>
-<figure>
-    <img src="/effectively-free-etl-with-lambdas/architecture.png"
-         alt="Proposed architecture of this pipeline. Spiders have been replaced with ants to improve the appealing-ness of this diagram."/> <figcaption>
+<figure><img src="/effectively-free-etl-with-lambdas/architecture.png"
+         alt="Proposed architecture of this pipeline. Spiders have been replaced with ants to improve the appealing-ness of this diagram."/><figcaption>
             <p>Proposed architecture of this pipeline. Spiders have been replaced with ants to improve the appealing-ness of this diagram.</p>
         </figcaption>
 </figure>
@@ -136,21 +135,20 @@ if (!doNotTrack) {
 <script type="text/javascript" src="http://gist.github.com/6feebf1ff42cccf882a30f7a4646ebfc.js"></script>
 <h3 id="isolating-dependencies-from-logic">Isolating dependencies from logic</h3>
 <p>It&rsquo;s good to isolate the Lambda function from its dependencies.  This helps to keep the Lambda short and clean. The dependencies can be conveniently packaged into a Layer which can then be attached to the Lambda function. The structure of the Layer should be as follows.</p>
-<pre><code>layer.zip
+<pre tabindex="0"><code>layer.zip
     |-python
         |-dependency1
         |-dependency2
         |-dependency3
 </code></pre><p>In this case, my main dependencies are the connectors to the various database that I am using, as well as my own library of functions for processing the raw data harvested from various sources. I cannot confirm or deny if the dist-info folder was necessary. My Layer looks as follows.</p>
-<pre><code>layer.zip
+<pre tabindex="0"><code>layer.zip
     |-python
         |-pymysql
         |-PyMySQL-0.9.3.dist-info
         |-(my custom library)
 </code></pre><p>Then, you can simply add the Layer to the Lambda. Just note that if you are updating your Layer to a new version, you will have to tell the Lambda to use the new version. This prevents your working Lambda from breaking due to bad untested new Layers.</p>
-<figure>
-    <img src="/effectively-free-etl-with-lambdas/layer.png"
-         alt="Select the layer option, and add the layer you have uploaded."/> <figcaption>
+<figure><img src="/effectively-free-etl-with-lambdas/layer.png"
+         alt="Select the layer option, and add the layer you have uploaded."/><figcaption>
             <p>Select the layer option, and add the layer you have uploaded.</p>
         </figcaption>
 </figure>
