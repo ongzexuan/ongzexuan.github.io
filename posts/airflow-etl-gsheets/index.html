@@ -74,7 +74,7 @@ if (!doNotTrack) {
                 
                     
                     <section class="post-full-tags">
-                        <a href="/ongzexuan.github.io/tags/dev">dev</a>
+                        <a href="/tags/dev">dev</a>
                     </section>
                 
 
@@ -139,13 +139,12 @@ if (!doNotTrack) {
 
 # Get access to worksheet
 gc = gspread.service_account(filename=CREDENTIALS_FILE)
-spreadsheet = gc.open(&quot;My Spreadsheet Name&quot;)
-worksheet = spreadsheet.worksheet(&quot;My Worksheet Name&quot;)
+spreadsheet = gc.open(&#34;My Spreadsheet Name&#34;)
+worksheet = spreadsheet.worksheet(&#34;My Worksheet Name&#34;)
 
 # Append data
-my_data = [&quot;something&quot;]
+my_data = [&#34;something&#34;]
 worksheet.append_row(my_data)
-
 </code></pre><p>I&rsquo;m quite happy with this package. My minor unimportant complaint is that without looking under the hood it&rsquo;s not immediately obvious how many API calls are made to Google&rsquo;s server for each function call. This has led to me exhausting the API rate limit when running backfill tasks too fast, but that&rsquo;s probably on me.</p>
 <h3 id="backfilling-with-new-tasks">Backfilling With New Tasks</h3>
 <p>Previously we had 4 single independent tasks, so there was nothing DAG-gy about it. Now we finally add a dependency - we export our data from the database to GSheets once we finished collecting and transforming the data from all sources.</p>
@@ -167,7 +166,7 @@ worksheet.append_row(my_data)
 <p>This is probably a good point in time to add some monitoring to the Unraid server we&rsquo;ve been running this thing on. We&rsquo;re running a number of containers and VMs, some of which do things on a regular basis, so it&rsquo;d be good to know if they succeeded or failed without having to login and check. Slack is probably the best option, so we setup a Slack workspace for our server, added an Airflow bot user, and passed the webhook URL to a Airflow Connection named <code>SLACK_CONN_ID</code>.</p>
 <p>I borrowed this <a href="https://github.com/ongzexuan/airflow-transaction-dags/blob/master/slack_operator.py">nice pair of slack operators</a> - there&rsquo;s one for success and one for failure. To integrate this into our DAG, we invoke the <code>on_success_callback</code> and <code>on_failure_callback</code> option for the <code>Operator</code>s. Specifically, at the very last task, we add the two respective calls into the keyword arguments as follows:</p>
 <pre tabindex="0"><code># Task: Export data to GSheets
-export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
+export_gsheet_task = PythonOperator(task_id=&#34;export_to_gsheet_task&#34;,
                                     python_callable=export_to_gsheet,
                                     provide_context=True,
                                     on_success_callback=task_success_slack_alert,
@@ -186,7 +185,7 @@ export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -216,7 +215,7 @@ export_gsheet_task = PythonOperator(task_id=&quot;export_to_gsheet_task&quot;,
     
     <article class="read-next-card">
         <header class="read-next-card-header">
-            <h3><span>More in</span> <a href="/ongzexuan.github.io/tags/dev">dev</a></h3>
+            <h3><span>More in</span> <a href="/tags/dev">dev</a></h3>
         </header>
         <div class="read-next-card-content">
             <ul>

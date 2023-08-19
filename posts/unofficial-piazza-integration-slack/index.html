@@ -140,13 +140,13 @@ if (!doNotTrack) {
 <p>The feed is orderd in a priority queue sort of way. Pinned posts are at the top, and then the remaining posts follow a chronological order. It happens that the post numbers increase linearly, so as long as we can get past the pinned posts, the first non-pinned post will be the latest post. We can distinguish a pinned post from a non-pinned post by the presence of the <code>pinned</code> key in the dictionary that represents the post in the feed (Ideally we would use the value but it seems to be designed this way currently). With this, we can write a function that returns us the latest post id.</p>
 <pre tabindex="0"><code>def get_max_id(feed):
     for post in feed:
-        if &quot;pin&quot; not in post:
-            return post[&quot;nr&quot;]
+        if &#34;pin&#34; not in post:
+            return post[&#34;nr&#34;]
     return -1
 </code></pre><h3 id="short-logic">Short Logic</h3>
 <p>With this function, the polling logic can then be simply:</p>
 <ol>
-<li>At the start-up of the app, fetch the latest post id. This serves as the &lsquo;last served&rsquo; post.</li>
+<li>At the start-up of the app, fetch the latest post id. This serves as the &rsquo;last served&rsquo; post.</li>
 <li>Each minute or interval, fetch the new latest post id. If there is a difference between the old and new latest ids, then we know new posts have occurred.</li>
 <li>We can then walk over the ids between the old and new latest and forward their information to Slack. In this case, we did a full fetch of the post information so we can forward more information to Slack instead of just the small snippet.</li>
 </ol>
@@ -165,7 +165,7 @@ if (!doNotTrack) {
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

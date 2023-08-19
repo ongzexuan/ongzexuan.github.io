@@ -154,7 +154,7 @@ if (!doNotTrack) {
         </figcaption>
 </figure>
 
-<p>Basically, for each &lsquo;thing&rsquo; we&rsquo;d like to collect data from, we expose a HTTP port. For the databases, since the databases by themselves can&rsquo;t really do that, we use the <a href="https://github.com/wrouesnel/postgres_exporter">Postgres Exporter</a> service some kind soul already created to do that for us. It&rsquo;s nicely packaged as a docker container, so all we have to do is specify the connection to the database and the port we intend to expose it on.</p>
+<p>Basically, for each &rsquo;thing&rsquo; we&rsquo;d like to collect data from, we expose a HTTP port. For the databases, since the databases by themselves can&rsquo;t really do that, we use the <a href="https://github.com/wrouesnel/postgres_exporter">Postgres Exporter</a> service some kind soul already created to do that for us. It&rsquo;s nicely packaged as a docker container, so all we have to do is specify the connection to the database and the port we intend to expose it on.</p>
 <h3 id="postgres-exporter">Postgres Exporter</h3>
 <p>To run the Postgres Exporter service, create an environment file with the following variables. The latter two variables are optional, it allows to specify which port and endpoint you&rsquo;d like to expose.</p>
 <pre tabindex="0"><code>DATA_SOURCE_NAME=postgresql://&lt;USER&gt;:&lt;PASSWORD&gt;@&lt;HOST&gt;:&lt;PORT&gt;/&lt;DATABASE&gt;?sslmode=disable
@@ -168,7 +168,7 @@ PG_EXPORTER_WEB_TELEMETRY_PATH=/metrics
 from prometheus_client import start_http_server, Summary
 
 # Instantiate Summary object for collecting data
-prom_summary_latency = Summary(&quot;processing_latency&quot;, &quot;Latency for processing a batch of polled records&quot;)
+prom_summary_latency = Summary(&#34;processing_latency&#34;, &#34;Latency for processing a batch of polled records&#34;)
 
 # Start HTTP server to expose port 7070 for metrics
 start_http_server(7070)
@@ -190,27 +190,27 @@ def our_function():
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-    monitor: 'codelab-monitor'
+    monitor: &#39;codelab-monitor&#39;
 
 # A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
+# Here it&#39;s Prometheus itself.
 scrape_configs:
 
-  - job_name: 'rds'
+  - job_name: &#39;rds&#39;
     scrape_interval: 5s
     static_configs:
-      - targets: ['&lt;IP&gt;:&lt;PORT&gt;']
+      - targets: [&#39;&lt;IP&gt;:&lt;PORT&gt;&#39;]
 
-  - job_name: 'rds-replica'
+  - job_name: &#39;rds-replica&#39;
     scrape_interval: 5s
     static_configs:
-      - targets: ['&lt;IP&gt;:&lt;PORT&gt;']
+      - targets: [&#39;&lt;IP&gt;:&lt;PORT&gt;&#39;]
 
-  - job_name: 'ingestion-service'
+  - job_name: &#39;ingestion-service&#39;
     scrape_interval: 5s
-    metrics_path: '/'
+    metrics_path: &#39;/&#39;
     static_configs:
-      - targets: ['&lt;IP&gt;:&lt;PORT&gt;']
+      - targets: [&#39;&lt;IP&gt;:&lt;PORT&gt;&#39;]
 </code></pre><p>Again, to start the Prometheus service we run the Docker container:</p>
 <pre tabindex="0"><code>sudo docker run -d --name prometheus -p 9090:9090 -v /var/lib/prometheus:/etc/prometheus --expose 9090 prom/prometheus
 </code></pre><p>Now, we simply visit port 9090 on the machine to see the Prometheus interface.</p>
@@ -229,7 +229,7 @@ scrape_configs:
 
 <h3 id="finally-grafana">Finally Grafana</h3>
 <p>Now, we get finally get to run Grafana. To persist the settings and dashboards, we map the <code>grafana</code> directory of the container to a local directory.</p>
-<pre tabindex="0"><code>sudo docker run -d -p 3000:3000 --name=grafana -v &quot;/var/lib/grafana:/home/grafana/&quot; grafana/grafana
+<pre tabindex="0"><code>sudo docker run -d -p 3000:3000 --name=grafana -v &#34;/var/lib/grafana:/home/grafana/&#34; grafana/grafana
 </code></pre><p>Again, navigating to port 3000 should bring up the main Grafana interface.</p>
 <figure><img src="/prometheus-grafana-seai/grafana.png"
          alt="Grafana main interface with some minor advertising."/><figcaption>
@@ -293,7 +293,7 @@ Another thing I like about Grafana is that its interface is quite simply and eas
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

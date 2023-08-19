@@ -120,10 +120,10 @@ if (!doNotTrack) {
 <p>There were a number of things that didn&rsquo;t work out of the box and were not particularly well documented.</p>
 <h4 id="images">Images</h4>
 <p>Adding images can be done using a shortcode as follows (compress the handlebars):</p>
-<pre tabindex="0"><code>{ { &lt; figure src=&quot;/malmo-maze-solver/moving_small.gif&quot; caption=&quot;Bot repeatedly falling into the lava.&quot; &gt; } }
+<pre tabindex="0"><code>{ { &lt; figure src=&#34;/malmo-maze-solver/moving_small.gif&#34; caption=&#34;Bot repeatedly falling into the lava.&#34; &gt; } }
 </code></pre><h4 id="github-gists">Github Gists</h4>
 <p>Adding gists is a bit more complicated. First add a shortcode under <code>layouts &gt; shortcodes &gt; gist.html</code>. In that file specify the JS.</p>
-<pre tabindex="0"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://gist.github.com/{{ .Get 0 }}.js&quot;&gt;&lt;/script&gt;
+<pre tabindex="0"><code>&lt;script type=&#34;text/javascript&#34; src=&#34;http://gist.github.com/{{ .Get 0 }}.js&#34;&gt;&lt;/script&gt;
 </code></pre><p>Then you can add gists using the shortcode with a gist id:</p>
 <pre tabindex="0"><code>{ {&lt;gist 07415be703d5576f9433ddb0730f7766&gt;} }
 </code></pre><p>The gist CSS layout does not play well with dark mode. It looks really ugly. I overwrote that with some custom CSS I borrowed from a source I lost, which I put under the <code>static</code> folder and import in my site header:</p>
@@ -163,7 +163,7 @@ if (!doNotTrack) {
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

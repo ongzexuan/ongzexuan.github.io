@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright © 2018–2020, zexuannotes</copyright>
-    <lastBuildDate>Mon, 15 Feb 2021 00:49:17 -0400</lastBuildDate><atom:link href="ongzexuan.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Aug 2023 00:00:00 -0400</lastBuildDate><atom:link href="ongzexuan.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Configure Nextcloud with Protonmail SMTP</title>
+      <link>ongzexuan.github.io/posts/configure-nextcloud-protonmail/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 -0400</pubDate>
+      
+      <guid>ongzexuan.github.io/posts/configure-nextcloud-protonmail/</guid>
+      <description>Configure Nextcloud to use Protonmail SMTP</description>
+    </item>
+    
     <item>
       <title>Setting up Nextcloud on Unraid</title>
       <link>ongzexuan.github.io/posts/nextcloud-unraid/</link>

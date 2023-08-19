@@ -74,7 +74,7 @@ if (!doNotTrack) {
                 
                     
                     <section class="post-full-tags">
-                        <a href="/ongzexuan.github.io/tags/dev">Dev</a>
+                        <a href="/tags/dev">Dev</a>
                     </section>
                 
 
@@ -200,24 +200,24 @@ if (!doNotTrack) {
 <h4 id="triggers">Triggers</h4>
 <p>Constructing the trigger when the RDS becomes available (2) is slightly more difficult. There is a built-in drop-down menu for EC2 services, where you can construct a trigger that activates when the state of the EC2 instance changes to a desired state. However, the menu for the Relational Database Service doesn&rsquo;t seem to provide a similar option. We can instead construct a custom event pattern as follows:</p>
 <pre tabindex="0"><code>{
-  &quot;detail-type&quot;: [
-    &quot;RDS DB Instance Event&quot;
+  &#34;detail-type&#34;: [
+    &#34;RDS DB Instance Event&#34;
   ],
-  &quot;source&quot;: [
-    &quot;aws.rds&quot;
+  &#34;source&#34;: [
+    &#34;aws.rds&#34;
   ],
-  &quot;resources&quot;: [
-    &quot;&lt;YOUR_RESOURCE_ARN&gt;&quot;
+  &#34;resources&#34;: [
+    &#34;&lt;YOUR_RESOURCE_ARN&gt;&#34;
   ],
-  &quot;detail&quot;: {
-    &quot;EventCategories&quot;: [
-      &quot;notification&quot;
+  &#34;detail&#34;: {
+    &#34;EventCategories&#34;: [
+      &#34;notification&#34;
     ],
-    &quot;SourceType&quot;: [
-      &quot;DB_INSTANCE&quot;
+    &#34;SourceType&#34;: [
+      &#34;DB_INSTANCE&#34;
     ],
-    &quot;Message&quot;: [
-      &quot;DB instance started&quot;
+    &#34;Message&#34;: [
+      &#34;DB instance started&#34;
     ]
   }
 }
@@ -259,7 +259,7 @@ if (!doNotTrack) {
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -289,7 +289,7 @@ if (!doNotTrack) {
     
     <article class="read-next-card">
         <header class="read-next-card-header">
-            <h3><span>More in</span> <a href="/ongzexuan.github.io/tags/dev">Dev</a></h3>
+            <h3><span>More in</span> <a href="/tags/dev">Dev</a></h3>
         </header>
         <div class="read-next-card-content">
             <ul>

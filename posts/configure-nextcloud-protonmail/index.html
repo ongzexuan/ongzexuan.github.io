@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>zexuannotes</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+
+    
+
+    <link rel="stylesheet" href="/ongzexuan.github.io/style.main.min.ca10a62cf679c6e8f980c4d7d512a4cf6fdb1191ab7f40829cf2b25267a94086.css" />
+    <link rel="stylesheet" type="text/css" href="/darkgist.css" />    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120020548-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        <a class="site-nav-logo" href="/">zexuannotes</a>
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/">Home</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/authors/zexuano/">About</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/tags/dev/">Dev</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/tags/projects/">Projects</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/tags/language/">Language</a></li>
+                
+                <li class="nav-home" role="menuitem"><a href="/ongzexuan.github.io/tags/books/">Books</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/tags/dev">dev</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">Configure Nextcloud with Protonmail SMTP</h1>
+
+                
+                    <p class="post-full-custom-excerpt">Configure Nextcloud to use Protonmail SMTP</p>
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><img src="/zexuano.png"></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Ze Xuan Ong</h2>
+                </div>
+            </div>
+        </div>
+        <a href="/authors/" class="author-avatar author-profile-image"><img src="/zexuano.png"></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Ze Xuan Ong</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2023-128-08">19 August 2023</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 3 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="/configure-nextcloud-protonmail/nextcloud.png" alt="Configure Nextcloud with Protonmail SMTP" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>It is quite straightforward to configure any SMTP mail server with Nextcloud. To do so with Protonmail requires a bit more work.</p>
+<p>For a start, we have to use the official Protonmail Bridge service which acts as an SMTP server we can use for Protonmail.</p>
+<p>We will use this unofficial <a href="https://hub.docker.com/r/shenxn/protonmail-bridge">shenxn/protonmail-bridge</a> docker image, it seems to be the only one available for Unraid.</p>
+<h2 id="point-docker-ports">Point docker ports</h2>
+<p>The docker container setup is just the default options in the Unraid menu, however I forwarded the container port 1025 to something on the host e.g. 10555. This is because Protonmail Bridge only listens on 127.0.0.1:1025 (for SMTP traffic), so any traffic being passed to the container from external sources will need to look like it is coming internally.</p>
+<h2 id="setting-up-the-account">Setting up the account</h2>
+<p>After installing the container on Unraid, you will want to first setup your login credentials.</p>
+<ol>
+<li>Enter a console session for the protonmail-bridge container</li>
+<li>Run <code>top</code>, and you will see a <code>bridge</code> process, a <code>protonmail...</code> process, and two <code>socat</code> processes. Kill all of them with <code>k</code>.</li>
+<li>Run <code>protonmail-bridge --cli</code> to start the bridge prompt. You should be able to enter things into the prompt.</li>
+<li>Enter <code>login</code> to start the login process to your account. If you have multiple domain names on your account it does not matter, it will all be associated with the same account.</li>
+<li>Once that is done, you can enter <code>info</code> to verify that the login credentials are correct. Copy the password displayed, you will need it for the configuration on Nextcloud.</li>
+<li>Exit the console and restart the container.</li>
+</ol>
+<figure><img src="/configure-nextcloud-protomail/top.png"
+         alt="Default top processes in `protonmail-bridge`` container, some to kill."/><figcaption>
+            <p>Default <code>top</code> processes in `protonmail-bridge`` container, some to kill.</p>
+        </figcaption>
+</figure>
+
+<p>If you run into errors such as &ldquo;port in use&rdquo;, it is because you didn&rsquo;t kill the <code>socat</code> processes.</p>
+<p>There are other guides that suggest <code>chmod u+x entrypoint.sh</code>, that also works, but it is less clean. This is because the <code>entrypoint.sh</code> script also sets up the two <code>socat</code> commands.</p>
+<h2 id="configure-nextcloud">Configure Nextcloud</h2>
+<p>Add the following section to yout <code>config.php</code> in your Nextcloud config. This is because the certificate for the bridge is self-signed, and Nextcloud will reject it by default.</p>
+<pre tabindex="0"><code>&#39;mail_smtpstreamoptions&#39; =&gt; 
+  array (
+    &#39;ssl&#39; =&gt; 
+    array (
+      &#39;allow_self_signed&#39; =&gt; true,
+      &#39;verify_peer&#39; =&gt; false,
+      &#39;verify_peer_name&#39; =&gt; false,
+    ),
+  ),
+</code></pre><p>Credits here for this suggestion: <a href="https://github.com/nextcloud/server/issues/37329#issuecomment-1488147847">https://github.com/nextcloud/server/issues/37329#issuecomment-1488147847</a></p>
+<p>Restart your Nextcloud container for good measure, and then setup the SMTP configuration. You should use the username and password you saw in the <code>info</code> command print out in the protonmail-bridge container. If you have named domains, you can set up the appropriate send-as email in this section.</p>
+<h2 id="final-notes">Final notes</h2>
+<p>That should work now! You can send yourself a test email, and it will send it to the email configured for the account.</p>
+<p>If that doesn&rsquo;t work, you can set the following to log in debug mode, so you might get a better handle on what is not working.</p>
+<pre tabindex="0"><code>&#39;loglevel&#39; =&gt; 0,
+&#39;mail_smtpdebug&#39; =&gt; true,
+</code></pre><p>In this case, you can also do poor man&rsquo;s debugging using telnet to make sure that your host and port (SMTP server) in the protonmail-bridge container is reachable.</p>
+
+                </div>                
+            </section>
+
+            <center>
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "zexuannotes" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </center>
+
+        </article>            
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/tags/dev">dev</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="ongzexuan.github.io/posts/books-2022/">
+                <img class="post-card-image"src="/books-2022/feature.png" alt="Books to read for 2022"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="ongzexuan.github.io/posts/books-2022/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">books</div>
+                    
+
+                    <h2 class="post-card-title">Books to read for 2022</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p>A snapshot of what&rsquo;s still on the shelf this year</p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Ze Xuan Ong</div>
+                            <a href="/authors/zexuano" class="static-avatar author-profile-image"><img src="/zexuano.png"></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Ze Xuan Ong</span>
+                        <span class="post-card-byline-date"><time datetime="2021-1212-12">31 December 2021</time>
+                            <span class="bull">&bull;</span> 6 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">            
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="ongzexuan.github.io">zexuannotes</a> &copy; 2023</section>
+                <nav class="site-footer-nav">
+                    <a href="ongzexuan.github.io">Latest Posts</a>
+                    
+                    
+                    
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

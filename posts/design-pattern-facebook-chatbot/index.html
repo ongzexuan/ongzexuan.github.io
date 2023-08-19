@@ -200,7 +200,7 @@ if (!doNotTrack) {
 User: Bobb
 Bot: Ok Bobb, can I get your current age?
 User: Hold on I spelt that wrong, I mean Bob
-Bot: I'm sorry I don't think that is a number! Can I get your age please?
+Bot: I&#39;m sorry I don&#39;t think that is a number! Can I get your age please?
 User: ...
 </code></pre><p>If your bot had any semblance of real intelligence to begin with, by the end of this conversation there will be no illusions about the non-intelligence of this entire ordeal.</p>
 <h2 id="channel-limitations">Channel Limitations</h2>
@@ -215,7 +215,7 @@ User: ...
 <h2 id="conversations-in-botkit">Conversations in Botkit</h2>
 <p>In constructing conversations, it is most likely that you would want some concept of a context and state. The context defines what the topic is, it may simply be referring to a specific conversation flow that was designed. The state defines which point in the conversation the user is currently in. This is important for determining the next response, or deciding if input needs to be collected and validated in the next response.</p>
 <p>As mentioned, I wound up using Botkit and Botkit Studio for my project. There are some pretty nifty features already built in, including a message queuing system, a conversation context, and the ability to send and receive messages from various channels (Messenger included of course). This isn&rsquo;t a post about Botkit per se, but some of the features I felt were necessary have by and large been implemented in Botkit, though not with as much flexibility as I would have preferred.</p>
-<p>Botkit has the concept of a &lsquo;conversation&rsquo;. This is akin to a context in which messages are somehow related and routed to one another, and where there can be saved variables e.g. user&rsquo;s name. Within the conversation, you have multiple of something you call a &lsquo;thread&rsquo;. I still find this slightly misleading. I was expecting a thread to contain a list of back and forth responses between user and bot, but the usual structure of a thread typically comprises of a message or two from the bot, followed either by waiting for user input (and then routing to another thread), or redirection to another thread, or terminating the conversation. Perhaps it may make more sense if you simply think about &lsquo;threads&rsquo; as &lsquo;states&rsquo;, and the scripts as &lsquo;conversations&rsquo;. You can define these conversations on Botkit Studio, or within the bot itself. Botkit Studio has a free trial, thereafter you pay a small subscription fee for a fixed number of API calls. If you&rsquo;ve used it yourself, the interface looks slightly dodgy, or maybe its a new paradigm of design that I have yet to appreciate, but I must say it is probably the best thing that you can really get out there right now.</p>
+<p>Botkit has the concept of a &lsquo;conversation&rsquo;. This is akin to a context in which messages are somehow related and routed to one another, and where there can be saved variables e.g. user&rsquo;s name. Within the conversation, you have multiple of something you call a &rsquo;thread&rsquo;. I still find this slightly misleading. I was expecting a thread to contain a list of back and forth responses between user and bot, but the usual structure of a thread typically comprises of a message or two from the bot, followed either by waiting for user input (and then routing to another thread), or redirection to another thread, or terminating the conversation. Perhaps it may make more sense if you simply think about &rsquo;threads&rsquo; as &lsquo;states&rsquo;, and the scripts as &lsquo;conversations&rsquo;. You can define these conversations on Botkit Studio, or within the bot itself. Botkit Studio has a free trial, thereafter you pay a small subscription fee for a fixed number of API calls. If you&rsquo;ve used it yourself, the interface looks slightly dodgy, or maybe its a new paradigm of design that I have yet to appreciate, but I must say it is probably the best thing that you can really get out there right now.</p>
 <h3 id="but-postbacks">But postbacks</h3>
 <p>As mentioned previously, postback buttons on Messenger trigger a different event than ordinary messages. This is good for allowing differentiation of response priority by event type, but it turns out that this is bad for trying to maintain a conversation context, since if we prioritize a postback message over a text message, then by default it is always outside every conversation context. That means each time you click a button, you have created/entered a new context, and god knows what has happened to the last one. If you choose to treat postback buttons as text instead, then you would have to account for all the postback buttons that matter in each conversation, and that would be a nightmare to script, not to mention code. It also does not seem likely that we will be able to segment postback buttons into different &lsquo;groups&rsquo; anytime soon, whether from Facebook&rsquo;s end or Botkit&rsquo;s end.</p>
 <p>The lesser of two evils than perhaps is to go with the former and enter a new conversation with each button press. I have also very purposefully omitted to look at the efficiency of terminating all existing conversations each time a button is pressed.</p>
@@ -241,14 +241,14 @@ User: ...
 <h3 id="a-task-oriented-chatterbot">A task-oriented chatterbot?</h3>
 <p>I&rsquo;m interested in trying to figure out if it is possible to meld the task-driven bots with chatterbots to create a less machinated question answering system. This is because most (Facebook) pages probably need some sort of FAQ system. Beyond a certain size of FAQ, it becomes less viable to have a laundry list of items. Instead, a search or chat solution might make more sense. Currently approaches to chat however, treat the chatbot as nothing more than another search box, which I feel greatly underutilizes the potential of the chat medium. Consider</p>
 <pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
-Bot: Here's a chart (link) of our busy times (sourced from Google)
+Bot: Here&#39;s a chart (link) of our busy times (sourced from Google)
 </code></pre><p>Or slightly better</p>
 <pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
 Bot: We are busiest at 1pm on weekdays!
 </code></pre><p>The most reasonable response can usually be elucidated from putting yourself in the shoes of your most conscientious customer service representative.</p>
 <pre tabindex="0"><code>User: Is the cafe busy around 2pm today?
-Bot: We're usually quite busy around that time on Wednesdays.
-Bot: If you could come earlier around 1pm, we're a bit less busy then!
+Bot: We&#39;re usually quite busy around that time on Wednesdays.
+Bot: If you could come earlier around 1pm, we&#39;re a bit less busy then!
 </code></pre><p>Where the task driven side of the bot reflects the use cases and pieces of information a user could possible derive from the service, the chatterbot side would represent a culture and personality. I think that some combination of a ChatScript engine with the Botkit framework might suffice for this role, though that would demand more from the dialog designer.</p>
 <h2 id="in-sum">In Sum</h2>
 <p>Chatbots are kind of cool and somewhat underutilised in my opinion. It&rsquo;s difficult to scale, and requires quite a ton of upfront investment in terms of development time and energy to make something that doesn&rsquo;t feel like it was hacked together in a day.</p>
@@ -259,7 +259,7 @@ Bot: If you could come earlier around 1pm, we're a bit less busy then!
             <center>
                 <div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
